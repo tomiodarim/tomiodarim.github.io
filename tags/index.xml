@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on tomiodarim</title>
+    <link>https://tomiodarim.github.io/tags/</link>
+    <description>Recent content in Tags on tomiodarim</description>
+    <image>
+      <title>tomiodarim</title>
+      <url>https://tomiodarim.github.io/papermod-cover.png</url>
+      <link>https://tomiodarim.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 14 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bandit</title>
+      <link>https://tomiodarim.github.io/tags/bandit/</link>
+      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/bandit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://tomiodarim.github.io/tags/linux/</link>
+      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>overthewire</title>
+      <link>https://tomiodarim.github.io/tags/overthewire/</link>
+      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/overthewire/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>write-up</title>
+      <link>https://tomiodarim.github.io/tags/write-up/</link>
+      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/write-up/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>agile</title>
+      <link>https://tomiodarim.github.io/tags/agile/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/agile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hackthebox</title>
+      <link>https://tomiodarim.github.io/tags/hackthebox/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/hackthebox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine</title>
+      <link>https://tomiodarim.github.io/tags/machine/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aoc2022</title>
+      <link>https://tomiodarim.github.io/tags/aoc2022/</link>
+      <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/aoc2022/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cybersecurity</title>
+      <link>https://tomiodarim.github.io/tags/cybersecurity/</link>
+      <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/cybersecurity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tryhackme</title>
+      <link>https://tomiodarim.github.io/tags/tryhackme/</link>
+      <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/tags/tryhackme/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

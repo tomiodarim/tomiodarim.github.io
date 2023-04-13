@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>linux on tomiodarim</title>
+    <link>https://tomiodarim.github.io/tags/linux/</link>
+    <description>Recent content in linux on tomiodarim</description>
+    <image>
+      <title>tomiodarim</title>
+      <url>https://tomiodarim.github.io/papermod-cover.png</url>
+      <link>https://tomiodarim.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 14 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OverTheWire - Bandit</title>
+      <link>https://tomiodarim.github.io/posts/otw-bandit/</link>
+      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/posts/otw-bandit/</guid>
+      <description>Bandit é um dos wargames do OverTheWire, ele tem a intenção de ensinar o básico de Linux para quem está começando a aprender. São 33 níveis onde é preciso encontrar a senha do SSH do próximo nível, que está escondida na máquina, para avançar.
+Este desafio pode ser acessado por meio de SSH no servidor bandit.labs.overthewire.org na porta 2220, o usuário será bandit seguido pelo número do level.
+Índice  Level 0 -&amp;gt; Level 1 Level 1 -&amp;gt; Level 2 Level 2 -&amp;gt; Level 3 Level 3 -&amp;gt; Level 4 Level 4 -&amp;gt; Level 5 Level 5 -&amp;gt; Level 6 Level 6 -&amp;gt; Level 7 Level 7 -&amp;gt; Level 8 Level 8 -&amp;gt; Level 9 Level 9 -&amp;gt; Level 10 Level 10 -&amp;gt; Level 11 Level 11 -&amp;gt; Level 12 Level 12 -&amp;gt; Level 13 Level 13 -&amp;gt; Level 14 Level 14 -&amp;gt; Level 15 Level 15 -&amp;gt; Level 16 Level 16 -&amp;gt; Level 17 Level 17 -&amp;gt; Level 18 Level 18 -&amp;gt; Level 19 Level 19 -&amp;gt; Level 20 Level 20 -&amp;gt; Level 21 Level 21 -&amp;gt; Level 22 Level 22 -&amp;gt; Level 23 Level 23 -&amp;gt; Level 24 Level 24 -&amp;gt; Level 25 Level 25 -&amp;gt; Level 26 Level 26 -&amp;gt; Level 27 Level 27 -&amp;gt; Level 28 Level 28 -&amp;gt; Level 29 Level 29 -&amp;gt; Level 30 Level 30 -&amp;gt; Level 31 Level 31 -&amp;gt; Level 32 Level 32 -&amp;gt; Level 33  Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, sendo usuário bandit0 e senha também bandit0.</description>
+    </item>
+    
+  </channel>
+</rss>
