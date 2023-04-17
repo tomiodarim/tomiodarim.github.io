@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox - HackTheBoo | tomiodarim</title>
+<meta name="keywords" content="write-up, hackthebox, ctf, hacktheboo">
+<meta name="description" content="Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.
+Crypto - Gonna Lift Em All Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.github.io/posts/htb-hacktheboo/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="HackTheBox - HackTheBoo" />
+<meta property="og:description" content="Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.
+Crypto - Gonna Lift Em All Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.github.io/posts/htb-hacktheboo/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-05T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - HackTheBoo"/>
+<meta name="twitter:description" content="Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.
+Crypto - Gonna Lift Em All Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox - HackTheBoo",
+      "item": "https://tomiodarim.github.io/posts/htb-hacktheboo/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HackTheBox - HackTheBoo",
+  "name": "HackTheBox - HackTheBoo",
+  "description": "Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.\nCrypto - Gonna Lift Em All Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo.",
+  "keywords": [
+    "write-up", "hackthebox", "ctf", "hacktheboo"
+  ],
+  "articleBody": "Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.\nCrypto - Gonna Lift Em All Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo.\nfrom Crypto.Util.number import bytes_to_long, getPrime import random FLAG = b'HTB{??????????????????????????????????????????????????????????????????????}' def gen_params(): p = getPrime(1024) g = random.randint(2, p-2) x = random.randint(2, p-2) h = pow(g, x, p) return (p, g, h), x def encrypt(pubkey): p, g, h = pubkey m = bytes_to_long(FLAG) y = random.randint(2, p-2) s = pow(h, y, p) return (g * y % p, m * s % p) def main(): pubkey, privkey = gen_params() c1, c2 = encrypt(pubkey) with open('data.txt', 'w') as f: f.write(f'p = {pubkey[0]}\\ng = {pubkey[1]}\\nh = {pubkey[2]}\\n(c1, c2) = ({c1}, {c2})\\n') if __name__ == \"__main__\": main() Para gerar as chaves nessa criptografia é utilizado um número primo p e dois números aleatórios entre 2 e p-2, por fim é calculado um valor h a partir dos números anteriores.\nPara criptografar as mensagens é utilizado a chave publica, composta pelo p, g e h, e mais um número aleatório y, com esses números o s é calculado. A partir do g, y e p é calculado o c1, e para o c2 é utilizado s, p e a mensagem convertida em long.\nO arquivo de texto que veio junto no zip contém a chave pública e os dois valores, c1 e c2, resultantes da criptografia.\np = 163096280281091423983210248406915712517889481034858950909290409636473708049935881617682030048346215988640991054059665720267702269812372029514413149200077540372286640767440712609200928109053348791072129620291461211782445376287196340880230151621619967077864403170491990385250500736122995129377670743204192511487 g = 90013867415033815546788865683138787340981114779795027049849106735163065530238112558925433950669257882773719245540328122774485318132233380232659378189294454934415433502907419484904868579770055146403383222584313613545633012035801235443658074554570316320175379613006002500159040573384221472749392328180810282909 h = 36126929766421201592898598390796462047092189488294899467611358820068759559145016809953567417997852926385712060056759236355651329519671229503584054092862591820977252929713375230785797177168714290835111838057125364932429350418633983021165325131930984126892231131770259051468531005183584452954169653119524751729 (c1, c2) = (159888401067473505158228981260048538206997685715926404215585294103028971525122709370069002987651820789915955483297339998284909198539884370216675928669717336010990834572641551913464452325312178797916891874885912285079465823124506696494765212303264868663818171793272450116611177713890102083844049242593904824396, 119922107693874734193003422004373653093552019951764644568950336416836757753914623024010126542723403161511430245803749782677240741425557896253881748212849840746908130439957915793292025688133503007044034712413879714604088691748282035315237472061427142978538459398404960344186573668737856258157623070654311038584) Resolução A flag que queremos descobrir está definida no código como sendo m e é utilizada apenas para gerar o valor c2, pela fórmula: c2 = m * s (mod p). Como já possuimos o c2 e o p, primeiro será necessário obter o s para então ser possível descobrir a mensagem m. Como s é um número obtido através de um calculo, precisa-se de todos os números que foram utilizados para ser possível calculá-lo novamente. E não possuímos o y utlizado, porém este pode ser obtido utilizando o c1.\nPelo código: c1 = g * y (mod p). Como o y é o único elemento que não sabemos o valor nessa formula podemos isolá-lo. Mas como estamos utilizando matemática modular há várias regras diferentes da matemática “normal”. Primeiro, não é possível apenas passar o p para o outro lado pois não se sabe por qual valor a multiplicação foi dividida para que o resto coubesse em p. Além disso, também não é possível passar o g para o outro lado dividindo, precisa-se encontrar um valor que quando multiplicado e calculado mod p resultará em algo equivalente a divisão por g, esse valor é chamado de inverso de g ou g-1. Dessa forma:\nc1 = g * y (mod p) - (c1 * g-1) % p = y % p.\nE como y já é um valor menor que p então não muda nada calcular o módulo dele, assim terminamos com: (c1 * g-1) % p = y.\nPara calcular os inversos que serão necessários foi utilizado o código extended_euclid.py encontrado no repositório modular-inverse no github do Justin Morrow. Para obter os inversos basta definir a variável n do código como o nosso p e a variável a como o número do qual se deseja obter o inverso.\ng^-1 = 120027004247158358184703385511138910446176598283657810928960020555251889532032199706156913358525135228299658796007082082987316875751452608872617761586138905964991747541264336966530405406630206297358091931611374901221899003603216345652222991753618659380928999922962044386202238694636990131574221328099007640482 Agora com o g-1, basta multiplicá-lo pelo c1 e fazer o módulo de p para obter o y. Dessa forma y = (c1 * g-1) % p. que resulta em:\ny = 151545036818752418931716093171030939827729309717327611184964755063685533596024474465903219353892430936128129116061427826165388249908655823309049171719865481058072839169911183783187254412879190149192386989186799988830028288993778261809217410313001568877314905167838867719115514855795015291428405597461040625720 Agora, seguindo a fórmula que está no código para obter s.\ns = pow(h, y, p) s = 97462626764574972789405707853736776801131892662685049788888445937335307309802916804770978800211152464507610133907443690200443337122554845143013035673411159832257337734583042568923321169807909583339712803034130755892624097871888129173372595909172265258031320357247928751965375753164262717332601963215413213638 Para obter o m que é a mensagem precisa-se fazer o mesmo qe foi feito para bter o y, então:\nm = (c2 * s-1) % p.\ns^-1 = 120027004247158358184703385511138910446176598283657810928960020555251889532032199706156913358525135228299658796007082082987316875751452608872617761586138905964991747541264336966530405406630206297358091931611374901221899003603216345652222991753618659380928999922962044386202238694636990131574221328099007640482 Agora basta apenas resolver aquela última conta para obter o long referente a mensagem.\nm = c2 * s^-1 % p m = 1172386289712688621866206342757024282557431573799768202628558217825308016488998421960879829861191968014842977524818155697111668467803322833848788605649390583219898324267188549415037 Por fim utilizando a função long_to_bytes() da biblioteca Crypto.Util.number podemos obter a flag HTB{b3_c4r3ful_wh3n_1mpl3m3n71n6_cryp705y573m5_1n_7h3_mul71pl1c471v3_6r0up}.\nForensics - Trick or Breach Nesse desafio havia um arquivo zip para ser baixado que possuia apenas um arquivo de captura de tráfego (.pcap). O tráfego capturado é composto por requisições e respostas DNS, sobre um subdomínios do domíno pumpkincorp[.]com.\nResolução Os números que estão como subdomínios são o hexadecimal de um arquivo que está sendo exfiltrado através do DNS. Então para resolver esse desafio e conseguir a flag precisa-se recuperar o arquivo exfiltrado.\nPara separar os hexadecimais referente ao arquivo que se deseja do resto do arquivo de captura, eu utilizei o cyberchef. Primeiro filtrei pelos hexadecimais seguidos pelo domínio e depois apenas os hexadecimais como pode ser visto na Imagem 02. Assim, pude obter todos os subdomínios mas estão repetidos pois estão tanto nas requisições como nas respostas do DNS e também todos possuem um número 2 adicional no início.\nPara remover as linhas repetidas e o 2 do início de todas, fiz um pequeno programa em python que imprime todas as linhas pares a partir do segundo caractere. Esse programa pode ser visto na Imagem 3 e acessado por esse link: https://onlinegdb.com/hrBscVMTH\nCom o resultado do programa anterior, utilizei novamente o cybechef mas agora para remover os espaços em branco e converter o arquivo para binário, que resultou em um arquizo PKZIP.\nCom o arquivo obtido anteriormente baixado, é possível descompactar para obter os arquivos que estavam sendo exfiltrados. Por fim, utilizando o comando grep busquei por qual arquivo possuia a frase “HTB” e utilizei o grep mais uma vez para receber apenas a linha do arquivo com a flag, como mostrado na Imagem 05.\nPwn - Entity Nesse desafio havia um arquivo zip para ser baixado e um docker que poderia ser ligado. O zip possuia um executável (ELF), um código escrito em C e um arquivo de texto que é uma flag falsa para testar. Já no docker estava sendo executado o mesmo programa. O código é o que está a seguir.\n#include #include #include  static union { unsigned long long integer; char string[8]; } DataStore; typedef enum { STORE_GET, STORE_SET, FLAG } action_t; typedef enum { INTEGER, STRING } field_t; typedef struct { action_t act; field_t field; } menu_t; menu_t menu() { menu_t res = { 0 }; char buf[32] = { 0 }; printf(\"\\n(T)ry to turn it off\\n(R)un\\n(C)ry\\n\\n \"); fgets(buf, sizeof(buf), stdin); buf[strcspn(buf, \"\\n\")] = 0; switch (buf[0]) { case 'T': res.act = STORE_SET; break; case 'R': res.act = STORE_GET; break; case 'C': res.act = FLAG; return res; default: puts(\"\\nWhat's this nonsense?!\"); exit(-1); } printf(\"\\nThis does not seem to work.. (L)ie down or (S)cream\\n\\n \"); fgets(buf, sizeof(buf), stdin); buf[strcspn(buf, \"\\n\")] = 0; switch (buf[0]) { case 'L': res.field = INTEGER; break; case 'S': res.field = STRING; break; default: printf(\"\\nYou are doomed!\\n\"); exit(-1); } return res; } void set_field(field_t f) { char buf[32] = {0}; printf(\"\\nMaybe try a ritual?\\n\\n \"); fgets(buf, sizeof(buf), stdin); switch (f) { case INTEGER: sscanf(buf, \"%llu\", \u0026DataStore.integer); if (DataStore.integer == 13371337) { puts(\"\\nWhat's this nonsense?!\"); exit(-1); } break; case STRING: memcpy(DataStore.string, buf, sizeof(DataStore.string)); break; } } void get_field(field_t f) { printf(\"\\nAnything else to try?\\n\\n \"); switch (f) { case INTEGER: printf(\"%llu\\n\", DataStore.integer); break; case STRING: printf(\"%.8s\\n\", DataStore.string); break; } }´ void get_flag() { if (DataStore.integer == 13371337) { system(\"cat flag.txt\"); exit(0); } else { puts(\"\\nSorry, this will not work!\"); } } int main() { setvbuf(stdout, NULL, _IONBF, 0); bzero(\u0026DataStore, sizeof(DataStore)); printf(\"\\nSomething strange is coming out of the TV..\\n\"); while (1) { menu_t result = menu(); switch (result.act) { case STORE_SET: set_field(result.field); break; case STORE_GET: get_field(result.field); break; case FLAG: get_flag(); break; } } } Como pode ser visto no início do código é definido uma estrutura de dados union que é capaz de interpretar os bits armazenados nela ou como unsigned long long (ull), que é um valor inteiro positivo de 8 bytes, ou como um array de 8 caracteres. Essa union foi nomeada como DataStore.\nO program possui um menu que permite escolher entre T para definir o valor do DataStore, R para imprimir o valor armazenado no DataStore e C que imprime a flag caso o valor do DataStore seja igual ao inteito 13371337. Ao definir ou imprimir o valor é possível escolher entre L e S para os bits serem interpretados como ull ou string respectivamente.\nO problema desse desafio é que não se pode pedir para armazenar um inteiro com o valor 13371337 e precisamos que o DataStore tenha esse valor para conseguir a flag. Para obter a flag precisa-se conectar no docker, o programa loval é apenas para testar.\nResolução Para resolver esse exercício basta enviar como string um valor possa ser também interpretado como o inteiro que desejamos. O valor decimal 13371337 pode ser convertido para o hexadecimal CC07C9, mostrado na Imagem 02.\nPorém a string salva os bytes invertidos por ser Big Endian. Então precisamos enviar o hexadecimal C907CC e zeros até preencher os bytes do DataStore. Porém para enviar esses dados vamos utilizar a biblioteca pwntools do Python com o código a seguir.\nimport pwn p = pwn.process('./entity') p.sendlineafter(b\"\", b\"T\") p.sendlineafter(b\"\", b\"S\") p.sendlineafter(b\"\", b\"\\xc9\\x07\\xcc\\x00\\x00\\x00\\x00\\x00\") p.sendlineafter(b\"\", b\"C\") p.recv(1024) print(p.recv(1024)) A função process é utilizada para iniciar o programa, então a função sendlineafter esperará receber os bytes referentes a “»” e então enviará os bytes escolhidos. Primeiro enviamos T para definir o DataStore e S para que os bytes sejam interpretados como string, então enviamos “\\xc9\\x07\\xcc\\x00\\x00\\x00\\x00\\x00”.\nCom o DataStore definido com o valor certo pode-se escolher a opção C no menu para que o programa retorne a flag. Assim, a função recv receberá os dados que seriam imprimidos pelo programa e o print imprimirá no terminal.\nA execução desse programa pode ser vista na Imagem 03, entretando é impresso uma flag de teste.\nEntão para conseguir a flag verdadeira durante o CTF bastava trocar a função process pela função connect passando como argumento o ip e porta do docker. Ao após alterar isso e executar o programa a flag é impressa no terminal.\nRev - Cult Meeting Nesse desafio havia um arquivo zip para ser baixado e um docker que poderia ser ligado. O zip possuia apenas um executável (ELF) e no docker estava sendo executado esse mesmo programa, para se conectar bastava utilizar o netcat.\nO programa ao ser executado imprimia uma mensagem requisitando por uma senha e aguardava o usuário inserí-la, como pode ser visto na Imagem 01. Se não fosse inserido a senha certa o programa imprimia uma mensagem e era interrompido.\nResolução Para identificar a senha utiliza-se o comando ltrace que intercepta e imprime todas as chamadas a bibliotecas feitas por um executável. Observando a Imagem 02, podemos ver que o programa lê a entrada do usuário utilizando a função fgets e depois chama a função strcmp para comparar a entrada com uma string. Essa string é a senha que deve ser digitada.\nEntão ao executar o programa novamente mas dessa vez inserindo a senha correta é invocada uma shell, demonstrado na Imagem 03. Porém o programa está rodando local, então teremos apenas uma shell na nossa própria máquina.\nEntão durante o CTF, era necessário se conectar com o servidor do Hack the Box na máquina que foi gerada através do netcat. Apoś estar conectado, bastava inserir a senha para obter uma shell, então com o cat era possível imprimir a flag que estava no mesmo diretório.\nRev - Encoded Payload Nesse desafio havia apenas um arquivo zip para ser baixado, contendo um executável (ELF). Esse programa vem sem permissão de excussão então deve-se usar “chmod +x encodedpayload” para que possa ser rodado. Ao ser executado esse programa não faz nada, como pode ser visto na Imagem 01.\nResolução Para achar a flag basta utilizar o comando strace que intercepta e imprime todas as chamadas de sistema (syscalls) feitas por um executável. Na Imagem 02 está uma parte da saída do strace e logo no início já é possível ver a flag.\nWeb - Evaluation Deck Nesse desafio havia um docker que poderia ser ligado que rodava ma aplicação web e um arquivo zip para ser baixado. Na aplicação web havia 20 cartas com as faces escondidas e um fantasma que possuia uma barra de vida, ao ser escolhida uma carta poderia causar dano ou curar o fantasma. Sendo que o objetivo era zerar matar o fantasma e tinha o limite de virar 8 cartas.\nAo olhar inspecionar os elementos da página é possível descobrir o poder que cada carta possui e se ela cura ou causa dano. As cartas com operador “+” aumentam a vida do fantasma, enquanto as com o operador “-“diminuem.\nO zip continha todos os arquivos da aplicação, um dockerfile e umscript para que a aplicação pudesse ser rodada localmente.\nResolução Ao olhar o arquivo routes.py da aplicação é possível encontrar o seguinte código. Neste código é utilizada uma string formada a partir da vida atual do fantasma somada ou subtraido o poder da carta dependendo do operador para gerar a vida restante. A função compile, então, transforma essa string em código que é executado utilizando a função exec.\ntry: code = compile(f'result = {int(current_health)}{operator}{int(attack_power)}', '', 'exec') exec(code, result) return response(result.get('result')) Com o BurpSuite então é possível interceptar a requisição e alterar os paramentos de vida atual, poder de ataque e operador.\nCom a alteração dos parâmetros na requisição pode-se executar qualquer código python no programa, dessa forma temos um Remote Code Execution (RCE).\nLogo utilizando a função open para abrir o arquivo com a flag e read para lê-lo obten-se a flag. Mas como estou rodando a aplicação localmente a flag é falsa para teste.\nDurante o CTF era preciso fazer a mesma coisa mas contra o docker rodando no servidor do HTB, então a flag que retornava era HTB{j4v4_5pr1ng_just_b3c4m3_j4v4_sp00ky!!}.\n",
+  "wordCount" : "2322",
+  "inLanguage": "pt",
+  "datePublished": "2022-11-05T00:00:00Z",
+  "dateModified": "2022-11-05T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.github.io/posts/htb-hacktheboo/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.github.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://tomiodarim.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tomiodarim.github.io/aboutme/" title="About Me">
+                    <span>About Me</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://tomiodarim.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+
+            </div>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      HackTheBox - HackTheBoo
+    </h1>
+    <div class="post-meta"><span title='2022-11-05 00:00:00 +0000 UTC'>5 de novembro de 2022</span>&nbsp;·&nbsp;Lucas Tomio Darim
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Sumário</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#crypto---gonna-lift-em-all" aria-label="Crypto - Gonna Lift Em All">Crypto - Gonna Lift Em All</a><ul>
+                        
+                <li>
+                    <a href="#resolu%c3%a7%c3%a3o" aria-label="Resolução">Resolução</a></li></ul>
+                </li>
+                <li>
+                    <a href="#forensics---trick-or-breach" aria-label="Forensics - Trick or Breach">Forensics - Trick or Breach</a><ul>
+                        
+                <li>
+                    <a href="#resolu%c3%a7%c3%a3o-1" aria-label="Resolução">Resolução</a></li></ul>
+                </li>
+                <li>
+                    <a href="#pwn---entity" aria-label="Pwn - Entity">Pwn - Entity</a><ul>
+                        
+                <li>
+                    <a href="#resolu%c3%a7%c3%a3o-2" aria-label="Resolução">Resolução</a></li></ul>
+                </li>
+                <li>
+                    <a href="#rev---cult-meeting" aria-label="Rev - Cult Meeting">Rev - Cult Meeting</a><ul>
+                        
+                <li>
+                    <a href="#resolu%c3%a7%c3%a3o-3" aria-label="Resolução">Resolução</a></li></ul>
+                </li>
+                <li>
+                    <a href="#rev---encoded-payload" aria-label="Rev - Encoded Payload">Rev - Encoded Payload</a><ul>
+                        
+                <li>
+                    <a href="#resolu%c3%a7%c3%a3o-4" aria-label="Resolução">Resolução</a></li></ul>
+                </li>
+                <li>
+                    <a href="#web---evaluation-deck" aria-label="Web - Evaluation Deck">Web - Evaluation Deck</a><ul>
+                        
+                <li>
+                    <a href="#resolu%c3%a7%c3%a3o-5" aria-label="Resolução">Resolução</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+  <div class="post-content"><p>Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.</p>
+<h2 id="crypto---gonna-lift-em-all">Crypto - Gonna Lift Em All</h2>
+<p>Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">getPrime</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">FLAG</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;HTB{??????????????????????????????????????????????????????????????????????}&#39;</span>
+
+<span class="k">def</span> <span class="nf">gen_params</span><span class="p">():</span>
+  <span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+  <span class="n">g</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">h</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">pubkey</span><span class="p">):</span>
+  <span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">pubkey</span>
+  <span class="n">m</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">y</span> <span class="o">%</span> <span class="n">p</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="n">s</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="n">pubkey</span><span class="p">,</span> <span class="n">privkey</span> <span class="o">=</span> <span class="n">gen_params</span><span class="p">()</span>
+  <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">pubkey</span><span class="p">)</span>
+
+  <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p = </span><span class="si">{</span><span class="n">pubkey</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">g = </span><span class="si">{</span><span class="n">pubkey</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">h = </span><span class="si">{</span><span class="n">pubkey</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">(c1, c2) = (</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</code></pre></div><p>Para gerar as chaves nessa criptografia é utilizado um número primo p e dois números aleatórios entre 2 e p-2, por fim é calculado um valor h a partir dos números anteriores.</p>
+<p>Para criptografar as mensagens é utilizado a chave publica, composta pelo p, g e h, e mais um número aleatório y, com esses números o s é calculado. A partir do g, y e p é calculado o c1, e para o c2 é utilizado s, p e a mensagem convertida em long.</p>
+<p>O arquivo de texto que veio junto no zip contém a chave pública e os dois valores, c1 e c2, resultantes da criptografia.</p>
+<pre tabindex="0"><code>p = 163096280281091423983210248406915712517889481034858950909290409636473708049935881617682030048346215988640991054059665720267702269812372029514413149200077540372286640767440712609200928109053348791072129620291461211782445376287196340880230151621619967077864403170491990385250500736122995129377670743204192511487
+g = 90013867415033815546788865683138787340981114779795027049849106735163065530238112558925433950669257882773719245540328122774485318132233380232659378189294454934415433502907419484904868579770055146403383222584313613545633012035801235443658074554570316320175379613006002500159040573384221472749392328180810282909
+h = 36126929766421201592898598390796462047092189488294899467611358820068759559145016809953567417997852926385712060056759236355651329519671229503584054092862591820977252929713375230785797177168714290835111838057125364932429350418633983021165325131930984126892231131770259051468531005183584452954169653119524751729
+(c1, c2) = (159888401067473505158228981260048538206997685715926404215585294103028971525122709370069002987651820789915955483297339998284909198539884370216675928669717336010990834572641551913464452325312178797916891874885912285079465823124506696494765212303264868663818171793272450116611177713890102083844049242593904824396, 119922107693874734193003422004373653093552019951764644568950336416836757753914623024010126542723403161511430245803749782677240741425557896253881748212849840746908130439957915793292025688133503007044034712413879714604088691748282035315237472061427142978538459398404960344186573668737856258157623070654311038584)
+</code></pre><h3 id="resolução">Resolução</h3>
+<p>A flag que queremos descobrir está definida no código como sendo m e é utilizada apenas para gerar o valor c2, pela fórmula: c2 = m * s (mod p). Como já possuimos o c2 e o p, primeiro será necessário obter o s para então ser possível descobrir a mensagem m. Como s é um número obtido através de um calculo, precisa-se de todos os números que foram utilizados para ser possível calculá-lo novamente. E não possuímos o y utlizado, porém este pode ser obtido utilizando o c1.</p>
+<p>Pelo código: c1 = g * y (mod p). Como o y é o único elemento que não sabemos o valor nessa formula podemos isolá-lo. Mas como estamos utilizando matemática modular há várias regras diferentes da matemática &ldquo;normal&rdquo;. Primeiro, não é possível apenas passar o p para o outro lado pois não se sabe por qual valor a multiplicação foi dividida para que o resto coubesse em p. Além disso, também não é possível passar o g para o outro lado dividindo, precisa-se encontrar um valor que quando multiplicado e calculado mod p resultará em algo equivalente a divisão por g, esse valor é chamado de inverso de g ou g<sup>-1</sup>. Dessa forma:</p>
+<p>c1 = g * y (mod p) -&gt; (c1 * g<sup>-1</sup>) % p = y % p.</p>
+<p>E como y já é um valor menor que p então não muda nada calcular o módulo dele, assim terminamos com: (c1 * g<sup>-1</sup>) % p = y.</p>
+<p>Para calcular os inversos que serão necessários foi utilizado o código <a href="https://github.com/justinmorrow/modular-inverse/blob/master/extended_euclid.py">extended_euclid.py</a> encontrado no repositório modular-inverse no github do Justin Morrow. Para obter os inversos basta definir a variável n do código como o nosso p e a variável a como o número do qual se deseja obter o inverso.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/crypto/1.png" alt="Imagem 01 - Obtenção do inverso de g"  />
+</p>
+<pre tabindex="0"><code>g^-1 = 120027004247158358184703385511138910446176598283657810928960020555251889532032199706156913358525135228299658796007082082987316875751452608872617761586138905964991747541264336966530405406630206297358091931611374901221899003603216345652222991753618659380928999922962044386202238694636990131574221328099007640482
+</code></pre><p>Agora com o g<sup>-1</sup>, basta multiplicá-lo pelo c1 e fazer o módulo de p para obter o y. Dessa forma y = (c1 * g<sup>-1</sup>) % p. que resulta em:</p>
+<pre tabindex="0"><code>y = 151545036818752418931716093171030939827729309717327611184964755063685533596024474465903219353892430936128129116061427826165388249908655823309049171719865481058072839169911183783187254412879190149192386989186799988830028288993778261809217410313001568877314905167838867719115514855795015291428405597461040625720
+</code></pre><p>Agora, seguindo a fórmula que está no código para obter s.</p>
+<pre tabindex="0"><code>s = pow(h, y, p)
+s = 97462626764574972789405707853736776801131892662685049788888445937335307309802916804770978800211152464507610133907443690200443337122554845143013035673411159832257337734583042568923321169807909583339712803034130755892624097871888129173372595909172265258031320357247928751965375753164262717332601963215413213638
+</code></pre><p>Para obter o m que é a mensagem precisa-se fazer o mesmo qe foi feito para bter o y, então:</p>
+<p>m = (c2 * s<sup>-1</sup>) % p.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/crypto/2.png" alt="Imagem 02 - Obtenção do inverso de s"  />
+</p>
+<pre tabindex="0"><code>s^-1 = 120027004247158358184703385511138910446176598283657810928960020555251889532032199706156913358525135228299658796007082082987316875751452608872617761586138905964991747541264336966530405406630206297358091931611374901221899003603216345652222991753618659380928999922962044386202238694636990131574221328099007640482
+</code></pre><p>Agora basta apenas resolver aquela última conta para obter o long referente a mensagem.</p>
+<pre tabindex="0"><code>m = c2 * s^-1 % p
+m = 1172386289712688621866206342757024282557431573799768202628558217825308016488998421960879829861191968014842977524818155697111668467803322833848788605649390583219898324267188549415037
+</code></pre><p>Por fim utilizando a função long_to_bytes() da biblioteca Crypto.Util.number podemos obter a flag HTB{b3_c4r3ful_wh3n_1mpl3m3n71n6_cryp705y573m5_1n_7h3_mul71pl1c471v3_6r0up}.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/crypto/3.png" alt="Imagem 03 - Obtenção da flag"  />
+</p>
+<h2 id="forensics---trick-or-breach">Forensics - Trick or Breach</h2>
+<p>Nesse desafio havia um arquivo zip para ser baixado que possuia apenas um arquivo de captura de tráfego (.pcap). O tráfego capturado é composto por requisições e respostas DNS, sobre um subdomínios do domíno pumpkincorp[.]com.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/forensics/1.png" alt="Imagem 01 - Querys DNS no arquivo de captura"  />
+</p>
+<h3 id="resolução-1">Resolução</h3>
+<p>Os números que estão como subdomínios são o hexadecimal de um arquivo que está sendo exfiltrado através do DNS. Então para resolver esse desafio e conseguir a flag precisa-se recuperar o arquivo exfiltrado.</p>
+<p>Para separar os hexadecimais referente ao arquivo que se deseja do resto do arquivo de captura, eu utilizei o cyberchef. Primeiro filtrei pelos hexadecimais seguidos pelo domínio e depois apenas os hexadecimais como pode ser visto na Imagem 02. Assim, pude obter todos os subdomínios mas estão repetidos pois estão tanto nas requisições como nas respostas do DNS e também todos possuem um número 2 adicional no início.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/forensics/2.png" alt="Imagem 02 - Subdomínios do arquivo de captura"  />
+</p>
+<p>Para remover as linhas repetidas e o 2 do início de todas, fiz um pequeno programa em python que imprime todas as linhas pares a partir do segundo caractere. Esse programa pode ser visto na Imagem 3 e acessado por esse link: <a href="https://onlinegdb.com/hrBscVMTH">https://onlinegdb.com/hrBscVMTH</a></p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/forensics/3.png" alt="Imagem 03 - Sanitização dos subdomínios obtidos"  />
+</p>
+<p>Com o resultado do programa anterior, utilizei novamente o cybechef mas agora para remover os espaços em branco e converter o arquivo para binário, que resultou em um arquizo PKZIP.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/forensics/4.png" alt="Imagem 04 - Sanitização dos subdomínios obtidos"  />
+</p>
+<p>Com o arquivo obtido anteriormente baixado, é possível descompactar para obter os arquivos que estavam sendo exfiltrados. Por fim, utilizando o comando grep busquei por qual arquivo possuia a frase &ldquo;HTB&rdquo; e utilizei o grep mais uma vez para receber apenas a linha do arquivo com a flag, como mostrado na Imagem 05.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/forensics/5.png" alt="Imagem 05 - Obtenção da flag"  />
+</p>
+<h2 id="pwn---entity">Pwn - Entity</h2>
+<p>Nesse desafio havia um arquivo zip para ser baixado e um docker que poderia ser ligado. O zip possuia um executável (ELF), um código escrito em C e um  arquivo de texto que é uma flag falsa para testar. Já no docker estava sendo executado o mesmo programa. O código é o que está a seguir.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">static</span> <span class="k">union</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">string</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">DataStore</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+    <span class="n">STORE_GET</span><span class="p">,</span>
+    <span class="n">STORE_SET</span><span class="p">,</span>
+    <span class="n">FLAG</span>
+<span class="p">}</span> <span class="n">action_t</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+    <span class="n">INTEGER</span><span class="p">,</span>
+    <span class="n">STRING</span>
+<span class="p">}</span> <span class="n">field_t</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> 
+    <span class="n">action_t</span> <span class="n">act</span><span class="p">;</span>
+    <span class="n">field_t</span> <span class="n">field</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">menu_t</span><span class="p">;</span>
+
+<span class="n">menu_t</span> <span class="nf">menu</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">menu_t</span> <span class="n">res</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">(T)ry to turn it off</span><span class="se">\n</span><span class="s">(R)un</span><span class="se">\n</span><span class="s">(C)ry</span><span class="se">\n\n</span><span class="s">&gt;&gt; &#34;</span><span class="p">);</span>
+    <span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+    <span class="n">buf</span><span class="p">[</span><span class="n">strcspn</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;T&#39;</span><span class="o">:</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">STORE_SET</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;R&#39;</span><span class="o">:</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">STORE_GET</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;C&#39;</span><span class="o">:</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">FLAG</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="n">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">What&#39;s this nonsense?!&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">This does not seem to work.. (L)ie down or (S)cream</span><span class="se">\n\n</span><span class="s">&gt;&gt; &#34;</span><span class="p">);</span>
+    <span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+    <span class="n">buf</span><span class="p">[</span><span class="n">strcspn</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;L&#39;</span><span class="o">:</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">INTEGER</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;S&#39;</span><span class="o">:</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">field</span> <span class="o">=</span> <span class="n">STRING</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">You are doomed!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">set_field</span><span class="p">(</span><span class="n">field_t</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Maybe try a ritual?</span><span class="se">\n\n</span><span class="s">&gt;&gt; &#34;</span><span class="p">);</span>
+    <span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">INTEGER</span><span class="p">:</span>
+        <span class="n">sscanf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&#34;%llu&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">DataStore</span><span class="p">.</span><span class="n">integer</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">DataStore</span><span class="p">.</span><span class="n">integer</span> <span class="o">==</span> <span class="mi">13371337</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">What&#39;s this nonsense?!&#34;</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nl">STRING</span><span class="p">:</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="n">DataStore</span><span class="p">.</span><span class="n">string</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">DataStore</span><span class="p">.</span><span class="n">string</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">get_field</span><span class="p">(</span><span class="n">field_t</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Anything else to try?</span><span class="se">\n\n</span><span class="s">&gt;&gt; &#34;</span><span class="p">);</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">INTEGER</span><span class="p">:</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">DataStore</span><span class="p">.</span><span class="n">integer</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nl">STRING</span><span class="p">:</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%.8s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">DataStore</span><span class="p">.</span><span class="n">string</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="err">´</span>
+
+<span class="kt">void</span> <span class="n">get_flag</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">DataStore</span><span class="p">.</span><span class="n">integer</span> <span class="o">==</span> <span class="mi">13371337</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">system</span><span class="p">(</span><span class="s">&#34;cat flag.txt&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Sorry, this will not work!&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">setvbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">_IONBF</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">bzero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">DataStore</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">DataStore</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Something strange is coming out of the TV..</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">menu_t</span> <span class="n">result</span> <span class="o">=</span> <span class="n">menu</span><span class="p">();</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">act</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nl">STORE_SET</span><span class="p">:</span>
+            <span class="n">set_field</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">field</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nl">STORE_GET</span><span class="p">:</span>
+            <span class="n">get_field</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">field</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nl">FLAG</span><span class="p">:</span>
+            <span class="n">get_flag</span><span class="p">();</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><p>Como pode ser visto no início do código é definido uma estrutura de dados union que é capaz de interpretar os bits armazenados nela ou como unsigned long long (ull), que é um valor inteiro positivo de 8 bytes, ou como um array de 8 caracteres. Essa  union foi nomeada como DataStore.</p>
+<p>O program possui um menu que permite escolher entre T para definir o valor do DataStore, R para imprimir o valor armazenado no DataStore e C que imprime a flag caso o valor do DataStore seja igual ao inteito 13371337.
+Ao definir ou imprimir o valor é possível escolher entre L e S para os bits serem interpretados como ull ou string respectivamente.</p>
+<p>O problema desse desafio é que não se pode pedir para armazenar um inteiro com o valor 13371337 e precisamos que o DataStore tenha esse valor para conseguir a flag. Para obter a flag precisa-se conectar no docker, o programa loval é apenas para testar.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/pwn/1.png" alt="Imagem 01 - Execução do programa"  />
+</p>
+<h3 id="resolução-2">Resolução</h3>
+<p>Para resolver esse exercício basta enviar como string um valor possa ser também interpretado como o inteiro que desejamos. O valor decimal 13371337 pode ser convertido para o hexadecimal CC07C9, mostrado na Imagem 02.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/pwn/2.png" alt="Imagem 02 - Conversão decimal para hexa"  />
+</p>
+<p>Porém a string salva os bytes invertidos por ser Big Endian. Então precisamos enviar o hexadecimal C907CC e zeros até preencher os bytes do DataStore. Porém para enviar esses dados vamos utilizar a biblioteca pwntools do Python com o código a seguir.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pwn</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pwn</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;./entity&#39;</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;&gt;&gt;&#34;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;T&#34;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;&gt;&gt;&#34;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;S&#34;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;&gt;&gt;&#34;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xc9\x07\xcc\x00\x00\x00\x00\x00</span><span class="s2">&#34;</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;&gt;&gt;&#34;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;C&#34;</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+</code></pre></div><p>A função process é utilizada para iniciar o programa, então a função sendlineafter esperará receber os bytes referentes a &ldquo;&raquo;&rdquo; e então enviará os bytes escolhidos. Primeiro enviamos T para definir o DataStore e S para que os bytes sejam interpretados como string, então enviamos &ldquo;\xc9\x07\xcc\x00\x00\x00\x00\x00&rdquo;.</p>
+<p>Com o DataStore definido com o valor certo pode-se escolher a opção C no menu para que o programa retorne a flag. Assim, a função recv receberá os dados que seriam imprimidos pelo programa e o print imprimirá no terminal.</p>
+<p>A execução desse programa pode ser vista na Imagem 03, entretando é impresso uma flag de teste.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/pwn/3.png" alt="Imagem 03 - Execução do programa que obtém a flag"  />
+</p>
+<p>Então para conseguir a flag verdadeira durante o CTF bastava trocar a função process pela função connect passando como argumento o ip e porta do docker. Ao após alterar isso e executar o programa a flag é impressa no terminal.</p>
+<h2 id="rev---cult-meeting">Rev - Cult Meeting</h2>
+<p>Nesse desafio havia um arquivo zip para ser baixado e um docker que poderia ser ligado. O zip possuia apenas um executável (ELF) e no docker estava sendo executado esse mesmo programa, para se conectar bastava utilizar o netcat.</p>
+<p>O programa ao ser executado imprimia uma mensagem requisitando por uma senha e aguardava o usuário inserí-la, como pode ser visto na Imagem 01. Se não fosse inserido a senha certa o programa imprimia uma mensagem e era interrompido.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/rev/1.png" alt="Imagem 01 - Execução do programa"  />
+</p>
+<h3 id="resolução-3">Resolução</h3>
+<p>Para identificar a senha utiliza-se o comando ltrace que intercepta e imprime todas as chamadas a bibliotecas feitas por um executável. Observando a Imagem 02, podemos ver que o programa lê a entrada do usuário utilizando a função fgets e depois chama a função strcmp para comparar a entrada com uma string. Essa string é a senha que deve ser digitada.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/rev/2.png" alt="Imagem 02 - Uso do ltrace"  />
+</p>
+<p>Então ao executar o programa novamente mas dessa vez inserindo a senha correta é invocada uma shell, demonstrado na Imagem 03. Porém o programa está rodando local, então teremos apenas uma shell na nossa própria máquina.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/rev/3.png" alt="Imagem 03 - Senha correta"  />
+</p>
+<p>Então durante o CTF, era necessário se conectar com o servidor do Hack the Box na máquina que foi gerada através do netcat. Apoś estar conectado, bastava inserir a senha para obter uma shell, então com o cat era possível imprimir a flag que estava no mesmo diretório.</p>
+<h2 id="rev---encoded-payload">Rev - Encoded Payload</h2>
+<p>Nesse desafio havia apenas um arquivo zip para ser baixado, contendo um executável (ELF). Esse programa vem sem permissão de excussão então deve-se usar &ldquo;chmod +x encodedpayload&rdquo; para que possa ser rodado. Ao ser executado esse programa não faz nada, como pode ser visto na Imagem 01.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/rev/4.png" alt="Imagem 01 - Execução do programa"  />
+</p>
+<h3 id="resolução-4">Resolução</h3>
+<p>Para achar a flag basta utilizar o comando strace que intercepta e imprime todas as chamadas de sistema (syscalls) feitas por um executável. Na Imagem 02 está uma parte da saída do strace e logo no início já é possível ver a flag.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/rev/5.png" alt="Imagem 02 - Uso do ltrace"  />
+</p>
+<h2 id="web---evaluation-deck">Web - Evaluation Deck</h2>
+<p>Nesse desafio havia um docker que poderia ser ligado que rodava ma aplicação web e um arquivo zip para ser baixado.
+Na aplicação web havia 20 cartas com as faces escondidas e um fantasma que possuia uma barra de vida, ao ser escolhida uma carta poderia causar dano ou curar o fantasma. Sendo que o objetivo era zerar matar o fantasma e tinha o limite de virar 8 cartas.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/web/1.png" alt="Imagem 01 - Interface da aplicação"  />
+</p>
+<p>Ao olhar inspecionar os elementos da página é possível descobrir o poder que cada carta possui e se ela cura ou causa dano. As cartas com operador &ldquo;+&rdquo; aumentam a vida do fantasma, enquanto as com o operador &ldquo;-&ldquo;diminuem.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/web/2.png" alt="Imagem 02 - Poder das cartas no menu inspecionar"  />
+</p>
+<p>O zip continha todos os arquivos da aplicação, um dockerfile e umscript para que a aplicação pudesse ser rodada localmente.</p>
+<h3 id="resolução-5">Resolução</h3>
+<p>Ao olhar o arquivo routes.py da aplicação é possível encontrar o seguinte código. Neste código é utilizada uma string formada a partir da vida atual do fantasma somada ou subtraido o poder da carta dependendo do operador para gerar a vida restante. A função compile, então, transforma essa string em código que é executado utilizando a função exec.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">    <span class="k">try</span><span class="p">:</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;result = </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">current_health</span><span class="p">)</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">operator</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">attack_power</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;string&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">)</span>
+        <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">))</span>
+</code></pre></div><p>Com o BurpSuite então é possível interceptar a requisição e alterar os paramentos de vida atual, poder de ataque e operador.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/web/3.png" alt="Imagem 03 - Requisição interceptada"  />
+</p>
+<p>Com a alteração dos parâmetros na requisição pode-se executar qualquer código python no programa, dessa forma temos um Remote Code Execution (RCE).</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/web/4.png" alt="Imagem 04 - Injeção de código na requisição"  />
+</p>
+<p>Logo utilizando a função open para abrir o arquivo com a flag e read para lê-lo obten-se a flag. Mas como estou rodando a aplicação localmente a flag é falsa para teste.</p>
+<p><img loading="lazy" src="/images/htb-hacktheboo/web/5.png" alt="Imagem 05 - Obtenção da flag"  />
+</p>
+<p>Durante o CTF era preciso fazer a mesma coisa mas contra o docker rodando no servidor do HTB, então a flag que retornava era HTB{j4v4_5pr1ng_just_b3c4m3_j4v4_sp00ky!!}.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.github.io/tags/write-up/">write-up</a></li>
+      <li><a href="https://tomiodarim.github.io/tags/hackthebox/">hackthebox</a></li>
+      <li><a href="https://tomiodarim.github.io/tags/ctf/">ctf</a></li>
+      <li><a href="https://tomiodarim.github.io/tags/hacktheboo/">hacktheboo</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2023</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
