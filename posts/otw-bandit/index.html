@@ -281,60 +281,60 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
 </div>
   <div class="post-content"><p>Bandit é um dos wargames do OverTheWire, ele tem a intenção de ensinar o básico de Linux para quem está começando a aprender. São 33 níveis onde é preciso encontrar a senha do SSH do próximo nível, que está escondida na máquina, para avançar.</p>
 <p>Este desafio pode ser acessado por meio de SSH no servidor bandit.labs.overthewire.org na porta 2220, o usuário será bandit seguido pelo número do level.</p>
-<h2 id="level-0">Level 0<a hidden class="anchor" aria-hidden="true" href="#level-0">#</a></h2>
+<h2 id="level-0">Level 0</h2>
 <p>As credenciais para acessar no nível 0 para começar são fornecidas, sendo usuário bandit0 e senha também bandit0.</p>
 <p>Na home deste usuário já encontramos a senha para o próximo nível no arquivo chamado &ldquo;readme&rdquo;, <strong>NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL</strong>.</p>
 <p><img loading="lazy" src="/images/otw-bandit/0.png" alt="0"  />
 </p>
-<h2 id="level-1">Level 1<a hidden class="anchor" aria-hidden="true" href="#level-1">#</a></h2>
+<h2 id="level-1">Level 1</h2>
 <p>Agora a senha também está em um arquivo na home, porém o arquivo se chama &ldquo;-&rdquo;. Para conseguir printar o conteúdo deste precisa-se passar o caminho com &ldquo;./-&rdquo;, caso coloque apenas &ldquo;-&rdquo; o interpretador do bash espera por algum parâmetro. A senha encontrada é <strong>rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi</strong>.</p>
 <p><img loading="lazy" src="/images/otw-bandit/1.png" alt="1"  />
 </p>
-<h2 id="level-2">Level 2<a hidden class="anchor" aria-hidden="true" href="#level-2">#</a></h2>
+<h2 id="level-2">Level 2</h2>
 <p>Nesse nível o nome do arquivo possui espaços, para printar podemos utilizar tanto o contrabarra &ldquo;&quot;, como aspas no nome. <strong>aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/2.png" alt="2"  />
 </p>
-<h2 id="level-3">Level 3<a hidden class="anchor" aria-hidden="true" href="#level-3">#</a></h2>
+<h2 id="level-3">Level 3</h2>
 <p>Caso o nome do arquivo começe com ponto final &ldquo;.&rdquo; ele não será mostrado com o comando ls normal, será necessário adicionar o parâmetro &ldquo;-a&rdquo;. <strong>2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/3.png" alt="3"  />
 </p>
-<h2 id="level-4">Level 4<a hidden class="anchor" aria-hidden="true" href="#level-4">#</a></h2>
+<h2 id="level-4">Level 4</h2>
 <p>Agora temos uma pasta com vários arquivo, mas a maioria deles não possui como conteúdo textos. Então utilizando o comando file podemos ver o tipo de conteúdo do arquivo e o asterisco &ldquo;*&rdquo; é um coringa que retorna todas as possíveis combinações.</p>
 <p>Com isso podemos ver que apenas o arquivo &ldquo;-file07&rdquo; possui texto com o padrão ASCII. <strong>lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/4.png" alt="4"  />
 </p>
-<h2 id="level-5">Level 5<a hidden class="anchor" aria-hidden="true" href="#level-5">#</a></h2>
+<h2 id="level-5">Level 5</h2>
 <p>Nesse nível é informado que o arquivo contém texto legível, 1033 bytes e não é executável. Com o comando find é possível buscar por certos atributos como tamanho, então utilizando o parâmetro &ldquo;-size 1033c&rdquo; podemos buscar por arquivo com o tamanho de 1033 bytes. O ponto final após o find indica que deve começar a buscar a partir do diretório atual e ir recursivamente em todos os diretórios. <strong>P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/5.png" alt="5"  />
 </p>
-<h2 id="level-6">Level 6<a hidden class="anchor" aria-hidden="true" href="#level-6">#</a></h2>
+<h2 id="level-6">Level 6</h2>
 <p>Agora foi informado que o arquivo pertence ao usuário bandit7 e ao grupo bandit6. Também com o find podemos buscar por arquivos de determinados usuários ou grupos, o &ldquo;/&rdquo; indica para buscar a partir da raiz do sistema de arquivos. <strong>z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/6.png" alt="6"  />
 </p>
-<h2 id="level-7">Level 7<a hidden class="anchor" aria-hidden="true" href="#level-7">#</a></h2>
+<h2 id="level-7">Level 7</h2>
 <p>Na home deste usuário possui um arquivo chamado &ldquo;data.txt&rdquo; que contém mais de 98 mil linhas. É informado que a senha está próxima a palavra &ldquo;millionth&rdquo;, então podemos utilizar o grep para filtrar por essa palavra. <strong>TESKZC0XvTetK0S9xNwm25STk5iWrBvP</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/7.png" alt="7"  />
 </p>
-<h2 id="level-8">Level 8<a hidden class="anchor" aria-hidden="true" href="#level-8">#</a></h2>
+<h2 id="level-8">Level 8</h2>
 <p>No arquivo &ldquo;data.txt&rdquo;, agora tem várias strings com formato parecido com a senha, mas a senha é a que não se repete. Utilizando o sort podemos ordenar o arquivo para agrupar os repetidos, então com o uniq será impresso na tela apenas uma vez cada e o parâmetro &ldquo;-c&rdquo; informa quantas vezes aquela linha está presente.</p>
 <p>Com isso a senha é a única linha que terá 1 ocorrência e não 10 como as demais. <strong>EN632PlfYiZbn3PhVK3XOGSlNInNE00t</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/8.png" alt="8"  />
 </p>
-<h2 id="level-9">Level 9<a hidden class="anchor" aria-hidden="true" href="#level-9">#</a></h2>
+<h2 id="level-9">Level 9</h2>
 <p>Na home temos um &ldquo;data.txt&rdquo; que é não é realmente um arquivo de texto, mas a senha será um texto legível dentro desse arquivo e está precedida por alguns sinais de igual &ldquo;=&rdquo;. O comando strings é capaz de buscar por textos legíveis dentro de um arquivo binário. <strong>G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/9.png" alt="9"  />
 </p>
-<h2 id="level-10">Level 10<a hidden class="anchor" aria-hidden="true" href="#level-10">#</a></h2>
+<h2 id="level-10">Level 10</h2>
 <p>O arquivo &ldquo;data.txt&rdquo; agora contém um texto que está codificado em Base64, para decodificar há o parâmetro &ldquo;-d&rdquo; no comando base64. <strong>6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/10.png" alt="10"  />
 </p>
-<h2 id="level-11">Level 11<a hidden class="anchor" aria-hidden="true" href="#level-11">#</a></h2>
+<h2 id="level-11">Level 11</h2>
 <p>Agora o texto está codificado utilizando ROT13, que são as letras deslocadas 13 posições no alfabeto. O site CyberChef possui várias operações que podem ser realizadas em texto sendo uma delas ROT13. <strong>JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/11.1.png" alt="11.1"  />
 </p>
 <p><img loading="lazy" src="/images/otw-bandit/11.2.png" alt="11.2"  />
 </p>
-<h2 id="level-12">Level 12<a hidden class="anchor" aria-hidden="true" href="#level-12">#</a></h2>
+<h2 id="level-12">Level 12</h2>
 <p>O &ldquo;data.txt&rdquo; desse nível é um hexdump de um arquivo que foi comprimido várias vezes por diferentes algoritmos de compressão. Para resolver esse eu criei uma pasta no diretório /tmp para armazenar os arquivos que fui descomprimindo.</p>
 <p>Primeiro para ir de hexdump para arquivo binário é só utilizar o comando xxd com o parâmetro &ldquo;-r&rdquo;, assim conseguimos o primeiro arquivo que está comprimido em gzip. Para descomprimir de gzip, há o comando gunzip, porém o nome do arquivo deve terminar com o sufixo .gz para que seja possível descomprimir.</p>
 <p>Depois de descomprimir o gzip conseguimos um arquivo comprimido em bzip2, que pode ser descomprimido com o bunzip2. Então, de novo, obtivemos um arquivo de gzip. Descomprimindo resulta em um arquivo comprimido duas vezes em tar, para descomprimir basta utilizar o comando tar com os parâmetros &ldquo;-xf&rdquo;. Com isso vem novamente um bzip2.</p>
@@ -343,25 +343,25 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
 <p>Descompactando novamente de tar e de gzip conseguimos, finalmente, um arquivo de texto que contém a senha para o próximo nível. <strong>wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/12.2.png" alt="12.2"  />
 </p>
-<h2 id="level-13">Level 13<a hidden class="anchor" aria-hidden="true" href="#level-13">#</a></h2>
+<h2 id="level-13">Level 13</h2>
 <p>Diferente dos níveis anteriores, nesse não coseguimos a senha, entretanto conseguimos a chave privada do SSH.</p>
 <p><img loading="lazy" src="/images/otw-bandit/13.1.png" alt="13.1"  />
 </p>
 <p>Copiando a chave e alterando as permissões dela podemos usá-la como argumento para o parâmetro &ldquo;-i&rdquo; do SSH, dessa forma não sendo necessário inserir a senha.</p>
 <p><img loading="lazy" src="/images/otw-bandit/13.2.png" alt="13.2"  />
 </p>
-<h2 id="level-14">Level 14<a hidden class="anchor" aria-hidden="true" href="#level-14">#</a></h2>
+<h2 id="level-14">Level 14</h2>
 <p>As senhas de todos os níveis são armazenadas em arquivos no &ldquo;/etc/bandit_pass&rdquo; porém apenas o próprio usuário tem a permissão de ver a senha. Como para esse nível entramos com a chave SSH não conseguimos a senha dele e vamos precisar dela para avançar. <strong>fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/14.1.png" alt="14.1"  />
 </p>
 <p>Para conseguir a senha do próximo nível é informado que precisaremos enviar a desse nível para um serviço que está escutando na porta 30000 desse servidor. Utilizando o netcat para fazer a conexão enviamos a senha atual e é retornado a próxima. <strong>jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/14.2.png" alt="14.2"  />
 </p>
-<h2 id="level-15">Level 15<a hidden class="anchor" aria-hidden="true" href="#level-15">#</a></h2>
+<h2 id="level-15">Level 15</h2>
 <p>Esse nível é igual ao anterior, mas agora a conexão precisa ser encriptada utilizando o SSL. Ao invés do netcat que usa telnet, usaremos o s_client do openssl para fazer a conexão. Depois é só enviar a senha atual que retorna a próxima. <strong>JQttfApK4SeyHwDlI9SXGR50qclOAil1</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/15.png" alt="15"  />
 </p>
-<h2 id="level-16">Level 16<a hidden class="anchor" aria-hidden="true" href="#level-16">#</a></h2>
+<h2 id="level-16">Level 16</h2>
 <p>Agora precisamos fazer o mesmo que no anterior mas não é informada a porta. Foi informado que está entre a 31000 e a 32000, sendo que alguns serviços nessa faixa apenas retornam o que foi enviado e um deles retorna a senha.</p>
 <p>Utilizando o nmap com o parâmetro &ldquo;-sV&rdquo; podemos ver o que está sendo executado em cada porta. Apenas na 31790 não é echo, então é essa que precisamos.</p>
 <p><img loading="lazy" src="/images/otw-bandit/16.1.png" alt="16.1"  />
@@ -369,19 +369,19 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
 <p>Ao enviar a senha é retornada a chave SSH privada.</p>
 <p><img loading="lazy" src="/images/otw-bandit/16.2.png" alt="16.2"  />
 </p>
-<h2 id="level-17">Level 17<a hidden class="anchor" aria-hidden="true" href="#level-17">#</a></h2>
+<h2 id="level-17">Level 17</h2>
 <p>No diretório home do bandit17 há dois arquivos com senhas, um chamado &ldquo;passwords.new&rdquo; e outro &ldquo;passwords.old&rdquo;, a senha que procuramos é a única que foi modificada no new. Utilizando o comando diff podemos ver as diferenças entre os dois arquivos. Na linha 42 houve uma alteração entre os dois arquivos, sendo a nova senha <strong>hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg</strong>.</p>
 <p><img loading="lazy" src="/images/otw-bandit/17.png" alt="17"  />
 </p>
-<h2 id="level-18">Level 18<a hidden class="anchor" aria-hidden="true" href="#level-18">#</a></h2>
+<h2 id="level-18">Level 18</h2>
 <p>Ao tentar logar com o SSH somos desconectados, nesse nível. Para que possamos executar comandos na máquina podemos colocá-los após o comando do ssh, assim quando digitarmos a senha o comando será executado na máquina. <strong>awhqfNnAbc1naukrpqDYcF95h7HoMTrC</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/18.png" alt="18"  />
 </p>
-<h2 id="level-19">Level 19<a hidden class="anchor" aria-hidden="true" href="#level-19">#</a></h2>
+<h2 id="level-19">Level 19</h2>
 <p>No diretório home agora temos um executável que nos permite executar os comandos como sendo o bandit20. Com esse programa podemos ler a senha do bandit20 armazenada no &ldquo;/etc/bandit_pass/bandit20&rdquo;. <strong>VxCazJaVykI6W36BkBU0mJTCM8rR95XT</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/19.png" alt="19"  />
 </p>
-<h2 id="level-20">Level 20<a hidden class="anchor" aria-hidden="true" href="#level-20">#</a></h2>
+<h2 id="level-20">Level 20</h2>
 <p>O executável que temos agora faz a conexão com alguma porta que seja passada como argumento e caso receba a senha desse nível ele responderá com a senha do próximo. Então para resolver esse desafio precisei conectar na máquina em duas sessões do SSH, em uma delas eu coloquei o netcat para escutar na porta 1234 e na outra utilizei esse executável para fazer a conexão.</p>
 <p>Primeiro coloquei netcat para escutar utilizando os parâmetros &ldquo;-lnvp&rdquo;, onde l é para escutar, n para não resolver o nome do DNS para ip, v para mostrar mais detalhes e p para especificar a porta.</p>
 <p><img loading="lazy" src="/images/otw-bandit/20.2.png" alt="20.2"  />
@@ -390,15 +390,15 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
 <p><img loading="lazy" src="/images/otw-bandit/20.1.png" alt="20.1"  />
 </p>
 <p>Quando o netcat recebeu a conexão, enviei a senha atual e assim recebi a próxima. <strong>NvEJF7oVjkddltPSrdKEFOllh9V1IBcq</strong></p>
-<h2 id="level-21">Level 21<a hidden class="anchor" aria-hidden="true" href="#level-21">#</a></h2>
+<h2 id="level-21">Level 21</h2>
 <p>O bandit22 possui uma tarefa que está agendada para executar o script &ldquo;/usr/bin/cronjob_bandit22.sh&rdquo; a todo minuto. Olhando o script vemos que está copiando a senha para um arquivo no diretório tmp e está dando permissão para todos lerem. <strong>WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/21.png" alt="21"  />
 </p>
-<h2 id="level-22">Level 22<a hidden class="anchor" aria-hidden="true" href="#level-22">#</a></h2>
+<h2 id="level-22">Level 22</h2>
 <p>Nesse também precisamos olhar um script que está sendo executado com o cron. Esse script copia senha do próprio usuário para um arquivo que o nome é o hash do nome do usuário. Calculando o hash do bandit23 conseguimos printar a senha dele. <strong>QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/22.png" alt="22"  />
 </p>
-<h2 id="level-23">Level 23<a hidden class="anchor" aria-hidden="true" href="#level-23">#</a></h2>
+<h2 id="level-23">Level 23</h2>
 <p>Como os dois anteriores, nesse também há uma tarefa definida no cron. O script desse irá executar e depois deletar todos os scripts que estiverem na pasta &ldquo;/var/spool/bandit24/foo&rdquo;. Dessa forma, se colocarmos algum script nesse diretório ele será executado como sendo o bandit24, que é quem criou o cronjob.</p>
 <p><img loading="lazy" src="/images/otw-bandit/23.1.png" alt="23.1"  />
 </p>
@@ -408,12 +408,12 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
 <p>Após alguns segundos a tarefa é executada rodando o script que eu criei. Com um cat podemos ver que a senha está no arquivo. <strong>VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/23.3.png" alt="23.3"  />
 </p>
-<h2 id="level-24">Level 24<a hidden class="anchor" aria-hidden="true" href="#level-24">#</a></h2>
+<h2 id="level-24">Level 24</h2>
 <p>Nesse nível há um serviço sendo executado na porta 30002 que retornará a senha do próximo caso seja inserido a senha atual e um pin de 4 dígitos. Precisaremos fazer um brute-force para descobrir o pin, já que pode ser qualquer número de 4 dígitos.</p>
 <p>Para não precisar testar as 10 mil possibilidades na mão, eu criei um script que faça isso. O loop do for irá criar um arquivo chamado &ldquo;pins&rdquo; que cada linha terá a senha atual e uma opção de pin. Depois será realizado a conexão utilizando o netcat e enviado uma linha por vez, e o grep filtrará para que não apareçam as mensagens de que o pin está errado. <strong>p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/24.png" alt="24"  />
 </p>
-<h2 id="level-25">Level 25<a hidden class="anchor" aria-hidden="true" href="#level-25">#</a></h2>
+<h2 id="level-25">Level 25</h2>
 <p>Na home do bandit25 há a chave SSH privada do bandit26 mas ao logar é impresso o texto de aviso na tela e a conexão acaba. Isso acontece pois a shell do bandit26 não é o bash, mas um script para printar o texto com o more.</p>
 <p><img loading="lazy" src="/images/otw-bandit/25.1.png" alt="25.1"  />
 </p>
@@ -423,44 +423,43 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
 <p>Clicando &ldquo;v&rdquo; poderemos executar comandos no vim. E com &ldquo;:set shell=/bin/bash|:shell&rdquo; conseguiremos uma shell como bandit26. <strong>c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/25.3.png" alt="25.1"  />
 </p>
-<h2 id="level-26">Level 26<a hidden class="anchor" aria-hidden="true" href="#level-26">#</a></h2>
+<h2 id="level-26">Level 26</h2>
 <p>Agora que temos uma shell interativa como bandit26 podemos prosseguir. Na home há um programa que nos permite executar comandos como bandit27. Com esse programa e com cat podemos ver a senha do bandit27 armazenada. <strong>YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/26.png" alt="26"  />
 </p>
-<h2 id="level-27">Level 27<a hidden class="anchor" aria-hidden="true" href="#level-27">#</a></h2>
+<h2 id="level-27">Level 27</h2>
 <p>Há um repositório de git do usuário bandit27-git que a senha é a mesma que do bandit27. Clonando esse repositório encontramos a senha do próximo armazenada em um arquivo &ldquo;README&rdquo;. <strong>AVanL161y9rsbcJIsFHuw35rjaOM19nR</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/27.png" alt="27"  />
 </p>
-<h2 id="level-28">Level 28<a hidden class="anchor" aria-hidden="true" href="#level-28">#</a></h2>
+<h2 id="level-28">Level 28</h2>
 <p>Como o anterior, esse também tem um repositório de git, mas a senha não está sendo mostrada.</p>
 <p><img loading="lazy" src="/images/otw-bandit/28.1.png" alt="28"  />
 </p>
 <p>Utilizando o comando git log podemos ver o log de todas as alterações que foram realizadas no repositório. Com o git show vemos quais foram as mudanças realizadas em cada commit. No primeiro deles foi retirada a senha e adicionado os X. <strong>tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/28.2.png" alt="28.2"  />
 </p>
-<h2 id="level-29">Level 29<a hidden class="anchor" aria-hidden="true" href="#level-29">#</a></h2>
+<h2 id="level-29">Level 29</h2>
 <p>Novamente um repositório de git. Agora a senha também não está no &ldquo;README.md&rdquo;. Mas é informado que não tem senha em produção, logo pode haver alguma em uma branch de desenvolvimento. Olhando as branchs encontramos algumas, sendo uma delas chamada &ldquo;dev&rdquo;, ao alterar para esse encontramos a senha. <strong>xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/29.png" alt="29"  />
 </p>
-<h2 id="level-30">Level 30<a hidden class="anchor" aria-hidden="true" href="#level-30">#</a></h2>
+<h2 id="level-30">Level 30</h2>
 <p>Nesse nível o repositório só possui um arquivo &ldquo;README.md&rdquo; e não há nenhum outro commit ou branch. Mas há uma tag na qual está a senha. <strong>OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/30.png" alt="30"  />
 </p>
-<h2 id="level-31">Level 31<a hidden class="anchor" aria-hidden="true" href="#level-31">#</a></h2>
+<h2 id="level-31">Level 31</h2>
 <p>Por fim o último de git, o &ldquo;README.md&rdquo; explica que precisamos fazer o push de um arquivo chamado &ldquo;key.txt&rdquo; com o contúdo &ldquo;May I come in?&rdquo; para o repositório. Como o &ldquo;.gitignore&rdquo; contém *.txt nenhum aquivo com essa extensão poderá ser adicionado, mas isso pode ser ignorado se usarmos o parâmetro &ldquo;-f&rdquo; no git add.</p>
 <p><img loading="lazy" src="/images/otw-bandit/31.1.png" alt="31.1"  />
 </p>
 <p>Depois é só fazer o commit e o push e é retornada a senha. <strong>rmCBvG56y58BXzv98yZGdO7ATVL5dW8y</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/31.2.png" alt="31.2"  />
 </p>
-<h2 id="level-32">Level 32<a hidden class="anchor" aria-hidden="true" href="#level-32">#</a></h2>
+<h2 id="level-32">Level 32</h2>
 <p>No último desafio somos colocados em uma shell que converte todas as letras para maiúsculas, então não conseguimos utilizar os comandos pois esses são escritos com letras minúsculas. A variável &ldquo;0&rdquo;, por padrão, armazena o comando para executar a shell. Então utilizando &ldquo;$0&rdquo; nenhum dos caracteres será alterado e o interpretador entenderá que queremos executar &ldquo;sh&rdquo;, assim obtemos uma shell normal. <strong>odHo63fHiFqcWWJG9rLiLDtPm45KzUKy</strong></p>
 <p><img loading="lazy" src="/images/otw-bandit/32.png" alt="32"  />
 </p>
-<h2 id="conclusão">Conclusão<a hidden class="anchor" aria-hidden="true" href="#conclusão">#</a></h2>
+<h2 id="conclusão">Conclusão</h2>
 <p>Aqui terminamos todos os 33 níveis que existem até o momento. Como pode ser visto todos foram sobre comandos básicos de Linux, visto que é um desafio para quem está iniciando. O OverTheWire possui outros Wargames que pretendo fazer o write-up no futuro.</p>
 <p>Agradeço a todos que leram. Qualquer dúvida ou sugestão de melhoria é só entrar em contato.</p>
-
 
   </div>
 

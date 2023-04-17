@@ -18,18 +18,6 @@ Level 0 As credenciais para acessar no nível 0 para começar são fornecidas, s
     </item>
     
     <item>
-      <title>HackTheBox - Agile</title>
-      <link>https://tomiodarim.github.io/posts/htb-agile/</link>
-      <pubDate>Sat, 11 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.github.io/posts/htb-agile/</guid>
-      <description>Agile é uma máquina Linux de dificuldade média, sendo a primeira máquina da Open Beta Season.
-Começando escaneando as portas com o nmap para encontrar quais estão abertas. Foram encontradas apenas a 22 de SSH e 80 com um servidor web.
-Ao fazer uma requisição a aplicação web, ocorre um redirecionamento para superpass.htb. Assim, sendo necessário adicionar este endereço ao &amp;ldquo;/etc/hosts&amp;rdquo;.
-Acessando a aplicação web encontra-se um gerenciador de senhas. Quando logado, é possível adicionar novas senhas ao cofre e exportá-lo.</description>
-    </item>
-    
-    <item>
       <title>TryHackMe - Advent of Cyber 2022</title>
       <link>https://tomiodarim.github.io/posts/advent-of-cyber-2022/</link>
       <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
@@ -38,6 +26,16 @@ Acessando a aplicação web encontra-se um gerenciador de senhas. Quando logado,
       <description>Esse write-up será sobre sobre o Advent of Cyber 2022, que é o evento especial de natal do TryHackMe. Todos os dias a plataforma liberará algum desafio. Esse write-up só será publicado ao final do evento.
 Nesse write-up não colocarei todo o conteúdo teórico apresentado nas Tasks, apenas um breve resumo e a explicação das questões. O evento pode ser acessado nesse link.
 E antes de começar gostaria de agradecer ao TryHackMe e a todos os envolvidos no desenvolvimento do evento pelos ótimos desafios e por todo conteúdo que pude aprender ou revisar.</description>
+    </item>
+    
+    <item>
+      <title>HackTheBox - HackTheBoo</title>
+      <link>https://tomiodarim.github.io/posts/htb-hacktheboo/</link>
+      <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/posts/htb-hacktheboo/</guid>
+      <description>Esse write-up será sobre sobre alguns desafios do CTF Hack The Boo feito pelo Hack the Box para o Halloween.
+Crypto - Gonna Lift Em All Nesse desafio havia um arquivo zip para ser baixado, contendo um programa em python e um arquivo de texto. O programa é um utilizado para gerar as chaves pública e privada de criptografia e criptografar um mensagem, como pode ser visto no código-fonte abaixo.</description>
     </item>
     
   </channel>
