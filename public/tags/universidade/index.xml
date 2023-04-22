@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>universidade on tomiodarim</title>
+    <link>https://tomiodarim.github.io/tags/universidade/</link>
+    <description>Recent content in universidade on tomiodarim</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 17 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.github.io/tags/universidade/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Arquiteturas de sistema de banco de dados</title>
+      <link>https://tomiodarim.github.io/posts/arquitetura-bd/</link>
+      <pubDate>Mon, 17 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.github.io/posts/arquitetura-bd/</guid>
+      <description>Esse texto é a apresentação de um trabalho relacionado a matéria de Banco de Dados da minha graduação. Todas as informações foram retiradas do livro Sistema de Banco de Dados 5ª edição.
+A arquitetura de um sistema de banco de dados é influenciada por diversos fatores como o computador que reside, a rede a qual está conectado e a localização desse sistema. Assim no livro é apresentado quatro arquiteturas, sendo elas: cliente centralizada, cliente-servidor, paralela e distribuída.</description>
+    </item>
+    
+  </channel>
+</rss>
