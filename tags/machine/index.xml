@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>machine on tomiodarim</title>
+    <link>https://tomiodarim.io/tags/machine/</link>
+    <description>Recent content in machine on tomiodarim</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/machine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - MonitorsTwo</title>
+      <link>https://tomiodarim.io/posts/htb-monitorstwo/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-monitorstwo/</guid>
+      <description>MonitorsTwo é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade da aplicação web para obter acesso como www-data em um docker, quebrar um hash para conseguir acesso de usuário na máquina host e por fim utilizar uma vulnerabilidade do Moby para executar um binário do Docker no Host para conseguir root.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh.</description>
+    </item>
+    
+  </channel>
+</rss>
