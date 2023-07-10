@@ -5,7 +5,106 @@
     <link>https://tomiodarim.io/tags/</link>
     <description>Recent content in Tags on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ansible</title>
+      <link>https://tomiodarim.io/tags/ansible/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hackthebox</title>
+      <link>https://tomiodarim.io/tags/hackthebox/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/hackthebox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>inject</title>
+      <link>https://tomiodarim.io/tags/inject/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/inject/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine</title>
+      <link>https://tomiodarim.io/tags/machine/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spring</title>
+      <link>https://tomiodarim.io/tags/spring/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>write-up</title>
+      <link>https://tomiodarim.io/tags/write-up/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/write-up/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kerberos</title>
+      <link>https://tomiodarim.io/tags/kerberos/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/kerberos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>protocolos</title>
+      <link>https://tomiodarim.io/tags/protocolos/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/protocolos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redes</title>
+      <link>https://tomiodarim.io/tags/redes/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/redes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>trabalho</title>
+      <link>https://tomiodarim.io/tags/trabalho/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/trabalho/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>universidade</title>
+      <link>https://tomiodarim.io/tags/universidade/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/universidade/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>certificação</title>
       <link>https://tomiodarim.io/tags/certifica%C3%A7%C3%A3o/</link>
@@ -61,24 +160,6 @@
     </item>
     
     <item>
-      <title>trabalho</title>
-      <link>https://tomiodarim.io/tags/trabalho/</link>
-      <pubDate>Mon, 17 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/trabalho/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>universidade</title>
-      <link>https://tomiodarim.io/tags/universidade/</link>
-      <pubDate>Mon, 17 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/universidade/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>bandit</title>
       <link>https://tomiodarim.io/tags/bandit/</link>
       <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
@@ -102,15 +183,6 @@
       <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/overthewire/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>write-up</title>
-      <link>https://tomiodarim.io/tags/write-up/</link>
-      <pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/write-up/</guid>
       <description></description>
     </item>
     
@@ -156,15 +228,6 @@
       <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hacktheboo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hackthebox</title>
-      <link>https://tomiodarim.io/tags/hackthebox/</link>
-      <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/hackthebox/</guid>
       <description></description>
     </item>
     

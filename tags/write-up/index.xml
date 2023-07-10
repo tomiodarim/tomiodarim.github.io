@@ -5,7 +5,18 @@
     <link>https://tomiodarim.io/tags/write-up/</link>
     <description>Recent content in write-up on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 14 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/write-up/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/write-up/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Inject</title>
+      <link>https://tomiodarim.io/posts/htb-inject/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-inject/</guid>
+      <description>Inject é uma máquina Linux de dificuldade fácil, sendo a segunda máquina da Open Beta Season.
+Essa máquina possui duas portas abertas 22 e 8080, onde a primeira é o serviço de SSH e a segunda uma aplicação Web, como pode ser visto pelo scan do nmap. Diferente de outras máquinas do Hack The Box, nessa não é necessário adicionar um domínio da aplicação ao arquivo de hosts.
+Ao acessar a aplicação web encontramos uma página sobre armazenamento de arquivos na nuvem.</description>
+    </item>
+    
     <item>
       <title>OverTheWire - Bandit</title>
       <link>https://tomiodarim.io/posts/otw-bandit/</link>

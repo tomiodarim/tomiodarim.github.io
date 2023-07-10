@@ -5,7 +5,28 @@
     <link>https://tomiodarim.io/</link>
     <description>Recent content on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Inject</title>
+      <link>https://tomiodarim.io/posts/htb-inject/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-inject/</guid>
+      <description>Inject é uma máquina Linux de dificuldade fácil, sendo a segunda máquina da Open Beta Season.
+Essa máquina possui duas portas abertas 22 e 8080, onde a primeira é o serviço de SSH e a segunda uma aplicação Web, como pode ser visto pelo scan do nmap. Diferente de outras máquinas do Hack The Box, nessa não é necessário adicionar um domínio da aplicação ao arquivo de hosts.
+Ao acessar a aplicação web encontramos uma página sobre armazenamento de arquivos na nuvem.</description>
+    </item>
+    
+    <item>
+      <title>Protocolo Kerberos</title>
+      <link>https://tomiodarim.io/posts/kerberos-redes/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/kerberos-redes/</guid>
+      <description>O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.
+A principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede.</description>
+    </item>
+    
     <item>
       <title>Meus estudos para o CySA&#43; e Security&#43;</title>
       <link>https://tomiodarim.io/posts/sec-cysa/</link>

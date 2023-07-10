@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>kerberos on tomiodarim</title>
+    <link>https://tomiodarim.io/tags/kerberos/</link>
+    <description>Recent content in kerberos on tomiodarim</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 04 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/kerberos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Protocolo Kerberos</title>
+      <link>https://tomiodarim.io/posts/kerberos-redes/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/kerberos-redes/</guid>
+      <description>O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.
+A principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede.</description>
+    </item>
+    
+  </channel>
+</rss>

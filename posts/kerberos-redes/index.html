@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Protocolo Kerberos | tomiodarim</title>
+<meta name="keywords" content="universidade, redes, trabalho, protocolos, kerberos">
+<meta name="description" content="O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.
+A principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.io/posts/kerberos-redes/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.io/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.io/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Protocolo Kerberos" />
+<meta property="og:description" content="O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.
+A principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.io/posts/kerberos-redes/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-04T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Protocolo Kerberos"/>
+<meta name="twitter:description" content="O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.
+A principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Protocolo Kerberos",
+      "item": "https://tomiodarim.io/posts/kerberos-redes/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Protocolo Kerberos",
+  "name": "Protocolo Kerberos",
+  "description": "O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.\nA principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede.",
+  "keywords": [
+    "universidade", "redes", "trabalho", "protocolos", "kerberos"
+  ],
+  "articleBody": "O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.\nA principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede. Ele opera na camada de aplicação do Modelo OSI e utiliza criptografia simétrica e assimétrica, dependendo da etapa, para proteger as informações de autenticação durante a transmissão.\nO funcionamento do Kerberos envolve três componentes principais: o cliente, o servidor de autenticação, também conhecido como Key Distribution Center (KDC), e os servidores de serviços. O processo de autenticação envolve a geração e troca de tickets entre os componentes.\nO Kerberos também oferece recursos de segurança, como autenticação mútua entre o cliente e o servidor e permite que os usuários autentiquem-se apenas uma vez (single sign-on), facilitando o acesso a vários serviços sem a necessidade de autenticação repetida. Além disso, o Kerberos é altamente flexível e escalável, permitindo sua implementação em uma variedade de ambientes, desde redes locais até redes corporativas distribuídas.\nHistória O Kerberos foi desenvolvido por Steve Miller e Clifford Neuman no MIT e entrou em uso em janeiro de 1987. Ele foi baseado no protocolo de chave simétrica Needham-Schroeder e foi originalmente projetado para proteger a rede do “Project Athena”. O projeto visava criar um ambiente de computação distribuída que fornecesse recursos de computação para estudantes e pesquisadores.\nAs primeiras três versões do Kerberos foram experimentais e não foram lançadas publicamente. A primeira versão disponível para o público foi a versão 4, que foi lançada em 24 de janeiro de 1989. No entanto, essa versão enfrentou restrições de exportação devido ao uso do algoritmo de criptografia Data Encryption Standard (DES), proibido pelo governo dos Estados Unidos para exportação para outros países.\nEm 1993, foi publicada a versão 5 do Kerberos para corrigir algumas limitações e problemas de segurança das versões anteriores. Essa versão foi documentada na RFC 1510 e posteriormente atualizada pelo Kerberos Working Group da Internet Engineering Task Force (IETF) em 2005, na RFC 4120. Sendo essa a versão utilizada atualmente.\nPara continuar o desenvolvimento e promover a adoção do Kerberos, o MIT criou o Kerberos Consortium em 2007. O consórcio é composto por várias empresas e instituições acadêmicas, incluindo a Apple, Google, Microsoft, MIT, Stanford University, entre outros.\nDesde o Windows 2000, o Kerberos se tornou o principal meio de autenticação para clientes e serviços em um domínio. No caso de clientes e serviços não estarem no mesmo domínio, é utilizada a autenticação com NTLM. Além disso, sistemas operacionais baseados em Unix, como macOS, Linux, Red Hat, Solaris e outros, também implementam a autenticação por Kerberos V para clientes e serviços.\nComponentes O Key Distribution Center (KDC) é o coração do sistema Kerberos, sendo um servidor centralizado responsável pela autenticação dos usuários e criação dos tíquetes de identificação. No caso de ambientes de Active Directory, o KDC é o Domain Controller. Ele consiste em dois componentes principais: o Authentication Service (AS) e o Ticket-Granting Service (TGS).\nO AS é responsável por autenticar os usuários que desejam acessar os serviços protegidos do sistema. Quando um usuário solicita autenticação, o AS verifica as credenciais do usuário e, se forem válidas, gera um tíquete de Autenticação (TGT) criptografado, que é enviado de volta ao cliente.\nO TGS é o segundo componente do KDC e atua como um intermediário entre os clientes e os serviços protegidos. Quando um cliente deseja acessar um serviço específico, ele envia o TGT recebido do AS juntamente com uma solicitação de serviço ao TGS. O TGS verifica a autenticidade do TGT e, se válido, gera um Service Ticket (ST) criptografado, que é enviado de volta ao cliente.\nProcesso de Autenticação O processo de autenticação do Kerberos envolve várias etapas e requer a interação entre o cliente, o AS, o TGS e o servidor de aplicação.\nO cliente solicita um TGT ao AS a partir de uma mensagem AS-REQ. Essa mensagem contém o nome de usuário do cliente em texto claro e um autenticador, que é o registro de tempo encriptado utilizando a chave do cliente. Então o AS tentará descriptografar utilizando a chave do cliente que ele possui salva no seu banco de dados, caso consiga o cliente estará autenticado.\nCom o cliente autenticado o AS responderá com uma mensagem AS-REP, que contém uma chave de sessão temporária e o TGT. A chave de sessão é aleatória e não fica salva no KDC, uma vez que o Kerberos é um protocolo sem estado, ela é enviada encriptada com a chave do cliente. Já o TGT contém todas as informações do cliente e uma cópia da chave de sessão, sendo encriptado utilizando a chave do KDC para que não seja alterado pelo cliente.\nAgora que o cliente possui um TGT, ele pode solicitar ST para acessar os serviços que desejar. Essa requisição é feita por meio de uma mensagem TGS-REQ para o TGS. A mensagem contém o nome do serviço que se deseja acessar, o TGT recebido no passo anterior e um autenticador encriptado com a chave de sessão.\nComo o KDC não tem salvo o chave de sessão, ele desencripta o TGT para extrair a que está no ticket e com ela verifica o autenticador recebido. Assim o KDC responderá com uma TGS-REP que contém uma nova chave de sessão para ser utilizada apenas entre o cliente e o serviço requisitado e um tíquete encriptado com a chave do serviço que contém as informações do usuário e essa nova chave de sessão. Todas essas informações são encriptadas utilizando a chave de sessão antiga do cliente com o KDC.\nAgora o cliente pode finalmente enviar uma solicitação ao serviço de aplicação que quer utilizar, enviando uma mensagem AP-REQ. Essa mensagem contém o tíquete que recebeu do TGS e um autenticador encriptado com a nova chave de sessão. Como as informações do cliente estão no tíquete e este está encriptado com a chave do serviço, o cliente não consegue modificar suas permissões e níveis de acesso.\nCom o autenticador e o TGS desencriptado, o serviço poderá saber todas as informações do cliente e ter certeza que são válidas. Com a autenticação concluída é retornada uma mensagem AP-REP para o cliente. O Kerberos é apenas um protocolo de autenticação e não de autorização, então o serviço utilizará outros protocolos para verificar se o cliente pode realmente ter acesso ao que ele está requisitando.\nComo pode ser visto, todo o processo depende de chaves compartilhadas e é um trabalho entre as três entidades. O protocolo protege usuários e serviços contra roubos e repetição de tíquetes, pois os invasores não saberiam as chaves para emitir autenticadores válidos.\nMensagens Como pode ser visto acima, cada mensagem do processo de autenticação possui um padrão específico com informações diferentes. Mas também existem outros tipos de mensagens além das que foram mostradas que são utilizadas em outros casos pelas entidades.\nAlguns exemplos de outras mensagens são o KRB-ERROR que contém o máximo de informações sobre erros que acontecem para que uma das entidades consiga lidar com o erro, essa mensagem não possui nenhum tipo de proteção. E o KRB-CRED para transmitir credenciais entre aplicações que não possuem nenhuma relação prévia.\nTickets Anteriormente foi mostrado as informações básicas de cada tíquete, já nessa seção será explicado cada campo presente nos tíquetes de acordo com a RFC 4120. No processo de autenticação do Kerberos V5, os tickets são compostos por duas partes: uma parte encriptada e outra não encriptada.\nA parte não encriptada do tíquete é formada pelos campos tkt-vno, realm e sname. Já a parte encriptada contém os seguintes campos: flags, key, crealm, cname, transited, authtime, startime, endtime, renew-till, caddr e authorization-data.\nO campo tkt-vno especifica a versão do Kerberos utilizada. Neste caso, trata-se da versão 5, portanto, esse campo é sempre definido como 5. O campo realm descreve uma rede lógica, similar a um domínio, que define um grupo de sistemas sob o mesmo KDC para o qual o tíquete é válido. Por fim, o campo sname identifica exclusivamente uma instância de um serviço.\nO campo flags indica as opções que foram utilizadas ou solicitadas durante a emissão do tíquete. Cada opção é representada por um bit específico, podendo estar ligado ou desligado. As opções são as seguintes: forwardable, forwarded, proxiable, proxy, may-postdate, postdates, invalid, renewable, initial, pre-authent, hw-authent, transited-policy-checked e ok-as-delegate. Essas opções ocupam os bits de 1 a 13, enquanto os bits 0 e 14 a 31 são reservados para uso futuro.\nEm seguida, o campo key armazena a chave de sessão. O campo crealm contém o nome do realm ao qual o cliente pertence, e o campo cname é o identificador único do cliente. O campo transited é uma lista dos realms pelos quais a autenticação do usuário do tíquete passou.\nOs próximos quatro campos são registros de tempo. Eles indicam, respectivamente, quando o usuário foi autenticado, a partir de quando o tíquete é válido, a data de expiração do tíquete e a data máxima para renovação, esse último apenas utilizado quando a flag renewable está presente.\nO campo caddr representa os endereços a partir dos quais o cliente pode utilizar o tíquete. Essa informação visa prevenir que atacantes copiem e o enviem a partir de outras máquinas. Esse campo pode ser nulo, representando qualquer endereço, ou conter uma lista de endereços.\nComo o Kerberos é exclusivamente um protocolo de autenticação, não realiza validações sobre se um usuário possui os privilégios necessários para acessar um serviço específico. Nesse sentido, o campo authorization-data informa todos os privilégios do usuário, que serão utilizados pelo serviço para realizar a autorização.\nProblemas e Limitações Apesar do Kerberos ser um protocolo robusto que tem sido amplamente utilizado por muitos sistemas ao longo do tempo, ainda existem certos problemas e limitações em suas capacidades, principalmente em relação à sua implementação.\nSe um usuário escolher uma senha fraca, é possível que um atacante consiga deduzi-la ou realizar um ataque de força bruta para descobri-la, uma vez que o protocolo não possui proteção contra esses tipos de ataques. Além disso, se um atacante obtiver o hash da senha, é possível se passar pelo usuário, uma vez que o hash é usado para criptografar as requisições, conforme explicado anteriormente.As chaves secretas utilizadas pelo KDC são um ponto de vulnerabilidade significativo do protocolo. Se essas chaves forem comprometidas, é possível gerar tickets para qualquer serviço em nome de qualquer usuário.\nUma grande limitação do protocolo é que os serviços precisam ser modificados para se integrarem ao Kerberos e aceitarem os tíquetes. Nem todos os serviços suportam esse tipo de autenticação. Os registros de tempo presentes nos tíquetes são elementos essenciais do Kerberos. Portanto, todas as máquinas que aceitam a autenticação precisam ter seus relógios sincronizados com o KDC, minimizando a diferença de tempo entre eles.\nPor fim, outra limitação está relacionada à disponibilidade do KDC. Se o KDC não estiver disponível por algum motivo, os usuários não conseguirão acessar nenhum serviço do domínio. Para mitigar esse problema, é possível usar vários KDCs dentro de um domínio, mas então surge a questão da sincronização adequada das informações em seus bancos de dados.\nAtaques Com o passar dos anos foram descobertas vários pontos fracos e configurações incorretas que podem ser exploradas para atacar o Kerberos. Os principais ataques são conhecidos como Kerberoasting, Golden Ticket e Silver Ticket.\nO ataque Kerberoasting é uma técnica utilizada por invasores para obter acesso a contas de serviço no ambiente Kerberos. Nesse tipo de ataque, o invasor busca identificar contas de serviço que possuam serviços associados e cujas chaves de serviço estejam armazenadas no banco de dados do Kerberos. Uma vez identificadas essas contas, o invasor pode solicitar um tíquete de serviço para uma dessas contas e, em seguida, descriptografar a chave de serviço contida no tíquete.\nA vulnerabilidade explorada no ataque Kerberoasting reside no fato de que as chaves de serviço são criptografadas com uma chave derivada das senhas das contas de serviço. Um invasor com acesso ao tíquete de serviço pode extrair a chave criptografada e usar técnicas offline para tentar quebrar essa criptografia, visando recuperar a senha original da conta de serviço. Uma vez que o invasor obtenha a senha da conta de serviço, ele pode comprometer a integridade e a segurança dos sistemas e serviços associados a essa conta.\nO ataque Golden Ticket é uma técnica utilizada por invasores para obter acesso privilegiado e persistente em um ambiente que utiliza o protocolo Kerberos. Nesse tipo de ataque, o invasor compromete a chave do KDC, conhecida como “KRBTGT”, e gera um tíquete de autenticação conhecido como “Golden Ticket”. Esse tíquete permite ao invasor se autenticar como um usuário legítimo, concedendo acesso total aos sistemas e serviços protegidos pelo Kerberos, sem a necessidade de fornecer credenciais válidas.\nO ataque ocorre quando o invasor obtém acesso privilegiado ao controlador de domínio do Kerberos, permitindo-lhe extrair a chave KRBTGT. Com essa chave, o invasor pode gerar um tíquete de autenticação válido para qualquer usuário ou serviço, com um tempo de vida longo e permissões amplas. O Golden Ticket permite que o invasor se autentique sem a necessidade de autenticar-se com um servidor de autenticação. Como resultado, o invasor obtém controle total sobre o ambiente, podendo acessar recursos, espionar atividades e até mesmo criar novas contas de usuário com privilégios elevados.\nNo ataque Silver Ticket, o invasor consegue gerar um tíquete de serviço falsificado, conhecido como “Silver Ticket”, para obter acesso não autorizado a recursos protegidos pelo Kerberos. O ataque ocorre quando o invasor obtém acesso a uma chave de serviço válida, geralmente por meio de comprometimento de uma conta de serviço ou exploração de vulnerabilidades. Com o Silver Ticket em mãos, o invasor pode se autenticar como um serviço legítimo no ambiente Kerberos, concedendo acesso aos recursos associados a esse serviço. O tíquete falso é criado usando a chave de serviço comprometida, permitindo ao invasor burlar a autenticação legítima e acessar recursos, como sistemas, servidores e bancos de dados, sem ser detectado.\nReferências SALTZER, J. H. On the Origin of Kerberos. IEEE Annals of the History of Computing, v. 43, n. 1, 2021. Disponível em: https://web.mit.edu/Saltzer/www/publications/Kerberosorigin.pdf. Acesso em: 04 de junho de 2023.\nLI, H. Kerberos (Protocol). Encyclopedia. Disponível em: https://encyclopedia.pub/entry/31033. Acesso em: 04 de junho de 2023.\nPAES, L. M. J. A.; ALBUQUERQUE, P. P. B. Kerberos. Universidade Federal do Rio de Janeiro. Disponível em: https://www.gta.ufrj.br/grad/07_1/kerberos/index.html. Acesso em 01 de julho de 2023.\nNEUMAN, C.; TS’O, T. The Kerberos Network Authentication Service (V5). Request for Comments, n. 1510. RFC Editor, 1993. Disponível em: https://www.rfc-editor.org/info/rfc1510. Acesso em: 04 de junho de 2023.\nNEUMAN, C.; et al. The Kerberos Network Authentication Service (V5). Request for Comments, n. 4120. RFC Editor, 2005. Disponível em: https://www.rfc-editor.org/info/rfc4120. Acesso em: 30 de junho de 2023.\nHack The Box Academy. Kerberos Attacks. 2023. Disponível em: https://academy.hackthebox.com/module/details/25. Acesso em: 01 de julho de 2023.\nKOHL, J. T.; et al. The Evolution of the Kerberos Authentication Service. IEEE Computer Society Press, 1991. Disponível em: https://www.cs.fsu.edu/~awang/courses/cop5611_s2023/kerberos.pdf. Acesso em: 05 de junho de 2023.\n",
+  "wordCount" : "2531",
+  "inLanguage": "pt",
+  "datePublished": "2023-07-04T00:00:00Z",
+  "dateModified": "2023-07-04T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.io/posts/kerberos-redes/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <div class="logo">
+            <ul id="menu">
+                <li>
+                    <a href="https://tomiodarim.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/aboutme/" title="About Me">
+                        <span>About Me</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      Protocolo Kerberos
+    </h1>
+    <div class="post-meta"><span title='2023-07-04 00:00:00 +0000 UTC'>4 de julho de 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>O Kerberos é um protocolo de autenticação de rede e acesso a serviços amplamente utilizado em ambientes de Active Directory. Desenvolvido no MIT (Instituto de Tecnologia de Massachusetts) na década de 1980, o Kerberos foi projetado para resolver o desafio de autenticar a identidade de usuários e serviços em uma rede aberta e potencialmente insegura.</p>
+<p>A principal função do Kerberos é fornecer autenticação, garantindo que apenas usuários e serviços legítimos tenham acesso aos recursos da rede. Ele opera na camada de aplicação do Modelo OSI e utiliza criptografia simétrica e assimétrica, dependendo da etapa, para proteger as informações de autenticação durante a transmissão.</p>
+<p>O funcionamento do Kerberos envolve três componentes principais: o cliente, o servidor de autenticação, também conhecido como Key Distribution Center (KDC), e os servidores de serviços. O processo de autenticação envolve a geração e troca de tickets entre os componentes.</p>
+<p>O Kerberos também oferece recursos de segurança, como autenticação mútua entre o cliente e o servidor e permite que os usuários autentiquem-se apenas uma vez (single sign-on), facilitando o acesso a vários serviços sem a necessidade de autenticação repetida. Além disso, o Kerberos é altamente flexível e escalável, permitindo sua implementação em uma variedade de ambientes, desde redes locais até redes corporativas distribuídas.</p>
+<h2 id="história">História</h2>
+<p>O Kerberos foi desenvolvido por Steve Miller e Clifford Neuman no MIT e entrou em uso em janeiro de 1987. Ele foi baseado no protocolo de chave simétrica Needham-Schroeder e foi originalmente projetado para proteger a rede do &ldquo;Project Athena&rdquo;. O projeto visava criar um ambiente de computação distribuída que fornecesse recursos de computação para estudantes e pesquisadores.</p>
+<p>As primeiras três versões do Kerberos foram experimentais e não foram lançadas publicamente. A primeira versão disponível para o público foi a versão 4, que foi lançada em 24 de janeiro de 1989. No entanto, essa versão enfrentou restrições de exportação devido ao uso do algoritmo de criptografia Data Encryption Standard (DES), proibido pelo governo dos Estados Unidos para exportação para outros países.</p>
+<p>Em 1993, foi publicada a versão 5 do Kerberos para corrigir algumas limitações e problemas de segurança das versões anteriores. Essa versão foi documentada na RFC 1510 e posteriormente atualizada pelo Kerberos Working Group da Internet Engineering Task Force (IETF) em 2005, na RFC 4120. Sendo essa a versão utilizada atualmente.</p>
+<p>Para continuar o desenvolvimento e promover a adoção do Kerberos, o MIT criou o Kerberos Consortium em 2007. O consórcio é composto por várias empresas e instituições acadêmicas, incluindo a Apple, Google, Microsoft, MIT, Stanford University, entre outros.</p>
+<p>Desde o Windows 2000, o Kerberos se tornou o principal meio de autenticação para clientes e serviços em um domínio. No caso de clientes e serviços não estarem no mesmo domínio, é utilizada a autenticação com NTLM. Além disso, sistemas operacionais baseados em Unix, como macOS, Linux, Red Hat, Solaris e outros, também implementam a autenticação por Kerberos V para clientes e serviços.</p>
+<h2 id="componentes">Componentes</h2>
+<p>O Key Distribution Center  (KDC) é o coração do sistema Kerberos, sendo um servidor centralizado responsável pela autenticação dos usuários e criação dos tíquetes de identificação. No caso de ambientes de Active Directory, o KDC é o Domain Controller.  Ele consiste em dois componentes principais: o Authentication Service  (AS) e o Ticket-Granting Service  (TGS).</p>
+<p>O AS é responsável por autenticar os usuários que desejam acessar os serviços protegidos do sistema. Quando um usuário solicita autenticação, o AS verifica as credenciais do usuário e, se forem válidas, gera um tíquete de Autenticação (TGT) criptografado, que é enviado de volta ao cliente.</p>
+<p>O TGS é o segundo componente do KDC e atua como um intermediário entre os clientes e os serviços protegidos. Quando um cliente deseja acessar um serviço específico, ele envia o TGT recebido do AS juntamente com uma solicitação de serviço ao TGS. O TGS verifica a autenticidade do TGT e, se válido, gera um Service Ticket (ST) criptografado, que é enviado de volta ao cliente.</p>
+<h2 id="processo-de-autenticação">Processo de Autenticação</h2>
+<p>O processo de autenticação do Kerberos envolve várias etapas e requer a interação entre o cliente, o AS, o TGS e o servidor de aplicação.</p>
+<p>O cliente solicita um TGT ao AS a partir de uma mensagem AS-REQ. Essa mensagem contém o nome de usuário do cliente em texto claro e um autenticador, que é o registro de tempo encriptado utilizando a chave do cliente. Então o AS tentará descriptografar utilizando a chave do cliente que ele possui salva no seu banco de dados, caso consiga o cliente estará autenticado.</p>
+<p>Com o cliente autenticado o AS responderá com uma mensagem AS-REP, que contém uma chave de sessão temporária e o TGT. A chave de sessão é aleatória e não fica salva no KDC, uma vez que o Kerberos é um protocolo sem estado, ela é enviada encriptada com a chave do cliente. Já o TGT contém todas as informações do cliente e uma cópia da chave de sessão, sendo encriptado utilizando a chave do KDC para que não seja alterado pelo cliente.</p>
+<p>Agora que o cliente possui um TGT, ele pode solicitar ST para acessar os serviços que desejar. Essa requisição é feita por meio de uma mensagem TGS-REQ para o TGS. A mensagem contém o nome do serviço que se deseja acessar, o TGT recebido no passo anterior e um autenticador encriptado com a chave de sessão.</p>
+<p>Como o KDC não tem salvo o chave de sessão, ele desencripta o TGT para extrair a que está no ticket e com ela verifica o autenticador recebido. Assim o KDC responderá com uma TGS-REP que contém uma nova chave de sessão para ser utilizada apenas entre o cliente e o serviço requisitado e um tíquete encriptado com a chave do serviço que contém as informações do usuário e essa nova chave de sessão. Todas essas informações são encriptadas utilizando a chave de sessão antiga do cliente com o KDC.</p>
+<p>Agora o cliente pode finalmente enviar uma solicitação ao serviço de aplicação que quer utilizar, enviando uma mensagem AP-REQ. Essa mensagem contém o tíquete que recebeu do TGS e um autenticador encriptado com a nova chave de sessão. Como as informações do cliente estão no tíquete e este está encriptado com a chave do serviço, o cliente não consegue modificar suas permissões e níveis de acesso.</p>
+<p>Com o autenticador e o TGS desencriptado, o serviço poderá saber todas as informações do cliente e ter certeza que são válidas. Com a autenticação concluída é retornada uma mensagem AP-REP para o cliente.  O Kerberos é apenas um protocolo de autenticação e não de autorização, então o serviço utilizará outros protocolos para verificar se o cliente pode realmente ter acesso ao que ele está requisitando.</p>
+<p>Como pode ser visto, todo o processo depende de chaves compartilhadas e é um trabalho entre as três entidades. O protocolo protege usuários e serviços contra roubos e repetição de tíquetes, pois os invasores não saberiam as chaves para emitir autenticadores válidos.</p>
+<h2 id="mensagens">Mensagens</h2>
+<p>Como pode ser visto acima, cada mensagem do processo de autenticação possui um padrão específico com informações diferentes. Mas também existem outros tipos de mensagens além das que foram mostradas que são utilizadas em outros casos pelas entidades.</p>
+<p>Alguns exemplos de outras mensagens são o KRB-ERROR que contém o máximo de informações sobre erros que acontecem para que uma das entidades consiga lidar com o erro, essa mensagem não possui nenhum tipo de proteção. E o KRB-CRED para transmitir credenciais entre aplicações que não possuem nenhuma relação prévia.</p>
+<h2 id="tickets">Tickets</h2>
+<p>Anteriormente foi mostrado as informações básicas de cada tíquete, já nessa seção será explicado cada campo presente nos tíquetes de acordo com a RFC 4120. No processo de autenticação do Kerberos V5, os tickets são compostos por duas partes: uma parte encriptada e outra não encriptada.</p>
+<p>A parte não encriptada do tíquete é formada pelos campos tkt-vno, realm e sname. Já a parte encriptada contém os seguintes campos: flags, key, crealm, cname, transited, authtime, startime, endtime, renew-till, caddr e authorization-data.</p>
+<p>O campo tkt-vno especifica a versão do Kerberos utilizada. Neste caso, trata-se da versão 5, portanto, esse campo é sempre definido como 5. O campo realm descreve uma rede lógica, similar a um domínio, que define um grupo de sistemas sob o mesmo KDC para o qual o tíquete é válido. Por fim, o campo sname identifica exclusivamente uma instância de um serviço.</p>
+<p>O campo flags indica as opções que foram utilizadas ou solicitadas durante a emissão do tíquete. Cada opção é representada por um bit específico, podendo estar ligado ou desligado. As opções são as seguintes: forwardable, forwarded, proxiable, proxy, may-postdate, postdates, invalid, renewable, initial, pre-authent, hw-authent, transited-policy-checked e ok-as-delegate. Essas opções ocupam os bits de 1 a 13, enquanto os bits 0 e 14 a 31 são reservados para uso futuro.</p>
+<p>Em seguida, o campo key armazena a chave de sessão. O campo crealm contém o nome do realm ao qual o cliente pertence, e o campo cname é o identificador único do cliente. O campo transited é uma lista dos realms pelos quais a autenticação do usuário do tíquete passou.</p>
+<p>Os próximos quatro campos são registros de tempo. Eles indicam, respectivamente, quando o usuário foi autenticado, a partir de quando o tíquete é válido, a data de expiração do tíquete e a data máxima para renovação, esse último apenas utilizado quando a flag renewable está presente.</p>
+<p>O campo caddr representa os endereços a partir dos quais o cliente pode utilizar o tíquete. Essa informação visa prevenir que atacantes copiem e o enviem a partir de outras máquinas. Esse campo pode ser nulo, representando qualquer endereço, ou conter uma lista de endereços.</p>
+<p>Como o Kerberos é exclusivamente um protocolo de autenticação, não realiza validações sobre se um usuário possui os privilégios necessários para acessar um serviço específico. Nesse sentido, o campo authorization-data informa todos os privilégios do usuário, que serão utilizados pelo serviço para realizar a autorização.</p>
+<h2 id="problemas-e-limitações">Problemas e Limitações</h2>
+<p>Apesar do Kerberos ser um protocolo robusto que tem sido amplamente utilizado por muitos sistemas ao longo do tempo, ainda existem certos problemas e limitações em suas capacidades, principalmente em relação à sua implementação.</p>
+<p>Se um usuário escolher uma senha fraca, é possível que um atacante consiga deduzi-la ou realizar um ataque de força bruta para descobri-la, uma vez que o protocolo não possui proteção contra esses tipos de ataques. Além disso, se um atacante obtiver o hash da senha, é possível se passar pelo usuário, uma vez que o hash é usado para criptografar as requisições, conforme explicado anteriormente.As chaves secretas utilizadas pelo KDC são um ponto de vulnerabilidade significativo do protocolo. Se essas chaves forem comprometidas, é possível gerar tickets para qualquer serviço em nome de qualquer usuário.</p>
+<p>Uma grande limitação do protocolo é que os serviços precisam ser modificados para se integrarem ao Kerberos e aceitarem os tíquetes. Nem todos os serviços suportam esse tipo de autenticação. Os registros de tempo presentes nos tíquetes são elementos essenciais do Kerberos. Portanto, todas as máquinas que aceitam a autenticação precisam ter seus relógios sincronizados com o KDC, minimizando a diferença de tempo entre eles.</p>
+<p>Por fim, outra limitação está relacionada à disponibilidade do KDC. Se o KDC não estiver disponível por algum motivo, os usuários não conseguirão acessar nenhum serviço do domínio. Para mitigar esse problema, é possível usar vários KDCs dentro de um domínio, mas então surge a questão da sincronização adequada das informações em seus bancos de dados.</p>
+<h2 id="ataques">Ataques</h2>
+<p>Com o passar dos anos foram descobertas vários pontos fracos e configurações incorretas que podem ser exploradas para atacar o Kerberos. Os principais ataques são conhecidos como Kerberoasting, Golden Ticket e Silver Ticket.</p>
+<p>O ataque Kerberoasting é uma técnica utilizada por invasores para obter acesso a contas de serviço no ambiente Kerberos. Nesse tipo de ataque, o invasor busca identificar contas de serviço que possuam serviços associados e cujas chaves de serviço estejam armazenadas no banco de dados do Kerberos. Uma vez identificadas essas contas, o invasor pode solicitar um tíquete de serviço para uma dessas contas e, em seguida, descriptografar a chave de serviço contida no tíquete.</p>
+<p>A vulnerabilidade explorada no ataque Kerberoasting reside no fato de que as chaves de serviço são criptografadas com uma chave derivada das senhas das contas de serviço. Um invasor com acesso ao tíquete de serviço pode extrair a chave criptografada e usar técnicas offline para tentar quebrar essa criptografia, visando recuperar a senha original da conta de serviço. Uma vez que o invasor obtenha a senha da conta de serviço, ele pode comprometer a integridade e a segurança dos sistemas e serviços associados a essa conta.</p>
+<p>O ataque Golden Ticket é uma técnica utilizada por invasores para obter acesso privilegiado e persistente em um ambiente que utiliza o protocolo Kerberos. Nesse tipo de ataque, o invasor compromete a chave do KDC, conhecida como &ldquo;KRBTGT&rdquo;, e gera um tíquete de autenticação conhecido como &ldquo;Golden Ticket&rdquo;. Esse tíquete permite ao invasor se autenticar como um usuário legítimo, concedendo acesso total aos sistemas e serviços protegidos pelo Kerberos, sem a necessidade de fornecer credenciais válidas.</p>
+<p>O ataque ocorre quando o invasor obtém acesso privilegiado ao controlador de domínio do Kerberos, permitindo-lhe extrair a chave KRBTGT. Com essa chave, o invasor pode gerar um tíquete de autenticação válido para qualquer usuário ou serviço, com um tempo de vida longo e permissões amplas. O Golden Ticket permite que o invasor se autentique sem a necessidade de autenticar-se com um servidor de autenticação. Como resultado, o invasor obtém controle total sobre o ambiente, podendo acessar recursos, espionar atividades e até mesmo criar novas contas de usuário com privilégios elevados.</p>
+<p>No ataque Silver Ticket, o invasor consegue gerar um tíquete de serviço falsificado, conhecido como &ldquo;Silver Ticket&rdquo;, para obter acesso não autorizado a recursos protegidos pelo Kerberos. O ataque ocorre quando o invasor obtém acesso a uma chave de serviço válida, geralmente por meio de comprometimento de uma conta de serviço ou exploração de vulnerabilidades.
+Com o Silver Ticket em mãos, o invasor pode se autenticar como um serviço legítimo no ambiente Kerberos, concedendo acesso aos recursos associados a esse serviço. O tíquete falso é criado usando a chave de serviço comprometida, permitindo ao invasor burlar a autenticação legítima e acessar recursos, como sistemas, servidores e bancos de dados, sem ser detectado.</p>
+<h2 id="referências">Referências</h2>
+<p>SALTZER, J. H. On the Origin of Kerberos. IEEE Annals of the History of Computing, v. 43, n. 1, 2021. Disponível em: <a href="https://web.mit.edu/Saltzer/www/publications/Kerberosorigin.pdf">https://web.mit.edu/Saltzer/www/publications/Kerberosorigin.pdf</a>. Acesso em: 04 de junho de 2023.</p>
+<p>LI, H. Kerberos (Protocol). Encyclopedia. Disponível em: <a href="https://encyclopedia.pub/entry/31033">https://encyclopedia.pub/entry/31033</a>. Acesso em: 04 de junho de 2023.</p>
+<p>PAES, L. M. J. A.; ALBUQUERQUE, P. P. B. Kerberos. Universidade Federal do Rio de Janeiro. Disponível em: <a href="https://www.gta.ufrj.br/grad/07_1/kerberos/index.html">https://www.gta.ufrj.br/grad/07_1/kerberos/index.html</a>. Acesso em 01 de julho de 2023.</p>
+<p>NEUMAN, C.; TS’O, T. The Kerberos Network Authentication Service (V5). Request for Comments, n. 1510. RFC Editor, 1993. Disponível em: <a href="https://www.rfc-editor.org/info/rfc1510">https://www.rfc-editor.org/info/rfc1510</a>. Acesso em: 04 de junho de 2023.</p>
+<p>NEUMAN, C.; et al. The Kerberos Network Authentication Service (V5). Request for Comments, n. 4120. RFC Editor, 2005. Disponível em: <a href="https://www.rfc-editor.org/info/rfc4120">https://www.rfc-editor.org/info/rfc4120</a>. Acesso em: 30 de junho de 2023.</p>
+<p>Hack The Box Academy. Kerberos Attacks. 2023. Disponível em: <a href="https://academy.hackthebox.com/module/details/25">https://academy.hackthebox.com/module/details/25</a>. Acesso em: 01 de julho de 2023.</p>
+<p>KOHL, J. T.; et al. The Evolution of the Kerberos Authentication Service. IEEE Computer Society Press, 1991. Disponível em: <a href="https://www.cs.fsu.edu/~awang/courses/cop5611_s2023/kerberos.pdf">https://www.cs.fsu.edu/~awang/courses/cop5611_s2023/kerberos.pdf</a>. Acesso em: 05 de junho de 2023.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.io/tags/universidade/">universidade</a></li>
+      <li><a href="https://tomiodarim.io/tags/redes/">redes</a></li>
+      <li><a href="https://tomiodarim.io/tags/trabalho/">trabalho</a></li>
+      <li><a href="https://tomiodarim.io/tags/protocolos/">protocolos</a></li>
+      <li><a href="https://tomiodarim.io/tags/kerberos/">kerberos</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2023</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
