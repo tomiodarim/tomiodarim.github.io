@@ -5,7 +5,19 @@
     <link>https://tomiodarim.io/tags/hackthebox/</link>
     <description>Recent content in hackthebox on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Agile</title>
+      <link>https://tomiodarim.io/posts/htb-agile/</link>
+      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-agile/</guid>
+      <description>Agile é uma máquina Linux de dificuldade média, sendo a primeira máquina da Open Beta Season.
+Começando escaneando as portas com o nmap para encontrar quais estão abertas. Foram encontradas apenas a 22 de SSH e 80 com um servidor web.
+Ao fazer uma requisição a aplicação web, ocorre um redirecionamento para superpass.htb. Assim, sendo necessário adicionar este endereço ao &amp;ldquo;/etc/hosts&amp;rdquo;.
+Acessando a aplicação web encontra-se um gerenciador de senhas. Quando logado, é possível adicionar novas senhas ao cofre e exportá-lo.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - Inject</title>
       <link>https://tomiodarim.io/posts/htb-inject/</link>
