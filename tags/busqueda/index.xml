@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>busqueda on tomiodarim</title>
+    <link>https://tomiodarim.io/tags/busqueda/</link>
+    <description>Recent content in busqueda on tomiodarim</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 12 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/busqueda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Busqueda</title>
+      <link>https://tomiodarim.io/posts/htb-busqueda/</link>
+      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-busqueda/</guid>
+      <description>Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local.</description>
+    </item>
+    
+  </channel>
+</rss>

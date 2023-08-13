@@ -5,20 +5,20 @@
     <link>https://tomiodarim.io/tags/</link>
     <description>Recent content in Tags on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>agile</title>
-      <link>https://tomiodarim.io/tags/agile/</link>
-      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      <title>busqueda</title>
+      <link>https://tomiodarim.io/tags/busqueda/</link>
+      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://tomiodarim.io/tags/agile/</guid>
+      <guid>https://tomiodarim.io/tags/busqueda/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hackthebox</title>
       <link>https://tomiodarim.io/tags/hackthebox/</link>
-      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hackthebox/</guid>
       <description></description>
@@ -27,7 +27,7 @@
     <item>
       <title>machine</title>
       <link>https://tomiodarim.io/tags/machine/</link>
-      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/machine/</guid>
       <description></description>
@@ -36,9 +36,18 @@
     <item>
       <title>write-up</title>
       <link>https://tomiodarim.io/tags/write-up/</link>
-      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/write-up/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>agile</title>
+      <link>https://tomiodarim.io/tags/agile/</link>
+      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/agile/</guid>
       <description></description>
     </item>
     
