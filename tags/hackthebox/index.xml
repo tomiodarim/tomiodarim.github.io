@@ -5,7 +5,18 @@
     <link>https://tomiodarim.io/tags/hackthebox/</link>
     <description>Recent content in hackthebox on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 12 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <language>pt</language>
+    <lastBuildDate>Sat, 02 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - MonitorsTwo</title>
+      <link>https://tomiodarim.io/posts/htb-monitorstwo/</link>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-monitorstwo/</guid>
+      <description>MonitorsTwo é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade da aplicação Cacti para obter acesso como www-data em um docker, quebrar um hash para conseguir acesso de usuário na máquina host e por fim utilizar uma vulnerabilidade do Moby para executar um binário do container no host para conseguir root.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - Busqueda</title>
       <link>https://tomiodarim.io/posts/htb-busqueda/</link>

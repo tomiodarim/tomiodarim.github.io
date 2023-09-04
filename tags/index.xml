@@ -5,20 +5,12 @@
     <link>https://tomiodarim.io/tags/</link>
     <description>Recent content in Tags on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 12 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>busqueda</title>
-      <link>https://tomiodarim.io/tags/busqueda/</link>
-      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/busqueda/</guid>
-      <description></description>
-    </item>
-    
+    <language>pt</language>
+    <lastBuildDate>Sat, 02 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hackthebox</title>
       <link>https://tomiodarim.io/tags/hackthebox/</link>
-      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hackthebox/</guid>
       <description></description>
@@ -27,18 +19,36 @@
     <item>
       <title>machine</title>
       <link>https://tomiodarim.io/tags/machine/</link>
-      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/machine/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>monitorstwo</title>
+      <link>https://tomiodarim.io/tags/monitorstwo/</link>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/monitorstwo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>write-up</title>
       <link>https://tomiodarim.io/tags/write-up/</link>
-      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/write-up/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>busqueda</title>
+      <link>https://tomiodarim.io/tags/busqueda/</link>
+      <pubDate>Sat, 12 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/busqueda/</guid>
       <description></description>
     </item>
     
