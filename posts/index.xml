@@ -6,7 +6,17 @@
     <description>Recent content in Posts on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 02 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Hack The Boo 2023 - Practice</title>
+      <link>https://tomiodarim.io/posts/htb-boo23_practice/</link>
+      <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-boo23_practice/</guid>
+      <description>Neste ano, o Hack The Boo se dividiu em duas partes: Practice e Competition. Este write-up é sobre a Practice que apresentou 16 desafios de dificuldade fácil. Abaixo, você encontrará a resolução de 13 desses desafios que consegui concluir. Restaram apenas três: um de criptografia, um de reversão e um de web.
+Crypto Hexoding Nesse desafio recebemos um arquivo script de python e um arquivo de texto com o seguinte conteúdo:</description>
+    </item>
+    
     <item>
       <title>HackTheBox - MonitorsTwo</title>
       <link>https://tomiodarim.io/posts/htb-monitorstwo/</link>
