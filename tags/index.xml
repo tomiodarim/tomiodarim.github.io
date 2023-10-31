@@ -6,11 +6,11 @@
     <description>Recent content in Tags on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Tue, 24 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ctf</title>
       <link>https://tomiodarim.io/tags/ctf/</link>
-      <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/ctf/</guid>
       <description></description>
@@ -19,7 +19,7 @@
     <item>
       <title>hacktheboo</title>
       <link>https://tomiodarim.io/tags/hacktheboo/</link>
-      <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hacktheboo/</guid>
       <description></description>
@@ -28,7 +28,7 @@
     <item>
       <title>hackthebox</title>
       <link>https://tomiodarim.io/tags/hackthebox/</link>
-      <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hackthebox/</guid>
       <description></description>
@@ -37,7 +37,7 @@
     <item>
       <title>write-up</title>
       <link>https://tomiodarim.io/tags/write-up/</link>
-      <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/write-up/</guid>
       <description></description>
@@ -80,29 +80,11 @@
     </item>
     
     <item>
-      <title>ansible</title>
-      <link>https://tomiodarim.io/tags/ansible/</link>
-      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/ansible/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>inject</title>
       <link>https://tomiodarim.io/tags/inject/</link>
       <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/inject/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>spring</title>
-      <link>https://tomiodarim.io/tags/spring/</link>
-      <pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/spring/</guid>
       <description></description>
     </item>
     
@@ -238,15 +220,6 @@
       <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/aoc2022/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cybersecurity</title>
-      <link>https://tomiodarim.io/tags/cybersecurity/</link>
-      <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/cybersecurity/</guid>
       <description></description>
     </item>
     

@@ -3,28 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://tomiodarim.io/tags/ctf/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/hacktheboo/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/hackthebox/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/posts/htb-boo23_practice/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/posts/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/write-up/</loc>
-    <lastmod>2023-10-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/posts/htb-monitorstwo/</loc>
     <lastmod>2023-09-02T00:00:00+00:00</lastmod>
@@ -47,16 +47,10 @@
     <loc>https://tomiodarim.io/posts/htb-agile/</loc>
     <lastmod>2023-08-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tomiodarim.io/tags/ansible/</loc>
-    <lastmod>2023-07-08T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://tomiodarim.io/posts/htb-inject/</loc>
     <lastmod>2023-07-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/inject/</loc>
-    <lastmod>2023-07-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tomiodarim.io/tags/spring/</loc>
     <lastmod>2023-07-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/kerberos/</loc>
@@ -101,7 +95,7 @@
     <loc>https://tomiodarim.io/tags/banco-de-dados/</loc>
     <lastmod>2023-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tomiodarim.io/aboutme/</loc>
+    <loc>https://tomiodarim.io/whoami/</loc>
     <lastmod>2023-04-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/bandit/</loc>
@@ -117,9 +111,6 @@
     <lastmod>2023-03-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/aoc2022/</loc>
-    <lastmod>2022-12-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tomiodarim.io/tags/cybersecurity/</loc>
     <lastmod>2022-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/tags/tryhackme/</loc>

@@ -6,11 +6,11 @@
     <description>Recent content on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Tue, 24 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox - Hack The Boo 2023 - Practice</title>
       <link>https://tomiodarim.io/posts/htb-boo23_practice/</link>
-      <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/posts/htb-boo23_practice/</guid>
       <description>Neste ano, o Hack The Boo se dividiu em duas partes: Practice e Competition. Este write-up é sobre a Practice que apresentou 16 desafios de dificuldade fácil. Abaixo, você encontrará a resolução de 13 desses desafios que consegui concluir. Restaram apenas três: um de criptografia, um de reversão e um de web.
@@ -91,11 +91,11 @@ A arquitetura de um sistema de banco de dados é influenciada por diversos fator
     </item>
     
     <item>
-      <title>About Me</title>
-      <link>https://tomiodarim.io/aboutme/</link>
+      <title>Whoami</title>
+      <link>https://tomiodarim.io/whoami/</link>
       <pubDate>Wed, 12 Apr 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://tomiodarim.io/aboutme/</guid>
+      <guid>https://tomiodarim.io/whoami/</guid>
       <description>Olá, meu nome é Lucas e sou um estudante de Ciência da Computação na Universidade Estadual do Oeste do Paraná (UNIOESTE), atualmente no terceiro ano do curso. Desde que comecei a me interessar por segurança cibernética há cerca de dois anos, tenho me dedicado intensamente a estudar e aplicar meus conhecimentos nessa área.
 Nesse período, tive a oportunidade de adquirir experiência profissional como voluntário e, mais recentemente, como estagiário no Parque Tecnológico Itaipu (PTI), contribuindo em um projeto de segurança cibernética voltado a infraestruturas críticas.</description>
     </item>
