@@ -6,7 +6,18 @@
     <description>Recent content in Posts on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 04 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Pilgrimage</title>
+      <link>https://tomiodarim.io/posts/htb-pilgrimage/</link>
+      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-pilgrimage/</guid>
+      <description>Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.
+Para essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - Topology</title>
       <link>https://tomiodarim.io/posts/htb-topology/</link>

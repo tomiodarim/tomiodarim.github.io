@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox - Pilgrimage | tomiodarim</title>
+<meta name="keywords" content="write-up, hackthebox, machine, pilgrimage">
+<meta name="description" content="Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.
+Para essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.io/posts/htb-pilgrimage/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.io/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.io/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="HackTheBox - Pilgrimage" />
+<meta property="og:description" content="Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.
+Para essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.io/posts/htb-pilgrimage/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-25T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - Pilgrimage"/>
+<meta name="twitter:description" content="Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.
+Para essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox - Pilgrimage",
+      "item": "https://tomiodarim.io/posts/htb-pilgrimage/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HackTheBox - Pilgrimage",
+  "name": "HackTheBox - Pilgrimage",
+  "description": "Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.\nPara essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.\nCom um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.",
+  "keywords": [
+    "write-up", "hackthebox", "machine", "pilgrimage"
+  ],
+  "articleBody": "Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.\nPara essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.\nCom um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web. O próprio nmap já identificou que existe um diretório de git no site.\nNessa aplicação podemos enviar imagens para terem seu tamanho reduzido, quando se faz o upload de uma imagem ele gera uma URL para acessar e baixar a nova imagem. Também é possível se registrar ou fazer login, assim a URL das suas imagens ficam salvas.\nUtilizando a ferramenta git-dumper podemos obter todo o conteúdo que está no repositório git do site. Com isso conseguimos os códigos da aplicação e o binário do magick na versão 7.1.0-49, que é uma ferramenta de manipulação de imagens.\nPodemos ver no código-fonte do index.php que é executado o magick com o parâmetro convert e a imagem que fizemos o upload. Após a imagem ser redimensionada a URL que é gerada é salva em um banco de dados sqlite na pasta “/var/db/pilgrimage”.\nif($upload) { $mime = \".png\"; $imagePath = $upload-\u003egetFullPath(); if(mime_content_type($imagePath) === \"image/jpeg\") { $mime = \".jpeg\"; } $newname = uniqid(); exec(\"/var/www/pilgrimage.htb/magick convert /var/www/pilgrimage.htb/tmp/\" . $upload-\u003egetName() . $mime . \" -resize 50% /var/www/pilgrimage.htb/shrunk/\" . $newname . $mime); unlink($upload-\u003egetFullPath()); $upload_path = \"http://pilgrimage.htb/shrunk/\" . $newname . $mime; if(isset($_SESSION['user'])) { $db = new PDO('sqlite:/var/db/pilgrimage'); $stmt = $db-\u003eprepare(\"INSERT INTO `images` (url,original,username) VALUES (?,?,?)\"); $stmt-\u003eexecute(array($upload_path,$_FILES[\"toConvert\"][\"name\"],$_SESSION['user'])); } header(\"Location: /?message=\" . $upload_path . \"\u0026status=success\"); } Essa versão do magick que está sendo utilizada é vulnerável ao CVE-2022-44268 e há exploits públicos. Aqui estarei utilizando a PoC do voidz0r que está disponível nesse link.\nEssa PoC foi escrita em rust e ela gera uma imagem que ao ser redimensionada fará o magick ler algum outro arquivo e inserir o conteúdo na imagem resultante. Aqui eu vou ler o arquivo do banco de dados da aplicação, pois como ele também armazena os logins dos usuários pode conter alguma credencial útil.\nDessa forma eu criei a imagem utilizando a PoC, depois enviei no site e fiz o download do output. Então com o identify, que também é uma ferramenta do magick, podemos obter o conteúdo do arquivo em hexadecimal (não coube no print).\nCom o CyberChef eu converti de hexadecimal para texto e também removi os caracteres nulos para facilitar a visualização. Assim, podemos ver as credenciais de um usuário, emily:abigchonkyboi123.\nEssas credenciais nos dão acesso a máquina via SSH e obtemos a primeira flag.\nAo fazer uma enumeração local com o pspy, encontramos que está sendo executado um script chamado “malwarescan.sh” pelo root.\nEsse script apenas utiliza o binwalk para validar se existe alguma string no arquivo que esteja na sua blacklist. Acontece que essa versão do binwalk que está sendo executada é vulnerável ao CVE-2022-4510.\nUtilizando a PoC que está no exploit-db eu criei um payload para uma reverse shell e a transferi para o diretório em que o script analisa.\nLogo ao baixar a imagem, já recebi a reverse shell como root.\n",
+  "wordCount" : "540",
+  "inLanguage": "pt",
+  "datePublished": "2023-11-25T00:00:00Z",
+  "dateModified": "2023-11-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.io/posts/htb-pilgrimage/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <div class="logo">
+            <ul id="menu">
+                <li>
+                    <a href="https://tomiodarim.io/" title="home">
+                        <span>home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/whoami/" title="whoami">
+                        <span>whoami</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/tags/" title="tags">
+                        <span>tags</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      HackTheBox - Pilgrimage
+    </h1>
+    <div class="post-meta"><span title='2023-11-25 00:00:00 +0000 UTC'>25 de novembro de 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Pilgrimage é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um Information Disclosure no ImageMagick para obter as credenciais para acessar por SSH. Com isso é possível abusar de uma vulnerabilidade do Binwalk para obter uma reverse shell como root.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/0.png" alt="banner"  />
+</p>
+<hr>
+<p>Para essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.</p>
+<p>Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web. O próprio nmap já identificou que existe um diretório de git no site.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/1.png" alt="nmap"  />
+</p>
+<p>Nessa aplicação podemos enviar imagens para terem seu tamanho reduzido, quando se faz o upload de uma imagem ele gera uma URL para acessar e baixar a nova imagem. Também é possível se registrar ou fazer login, assim a URL das suas imagens ficam salvas.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/2.png" alt="site"  />
+</p>
+<p>Utilizando a ferramenta <a href="https://github.com/arthaud/git-dumper">git-dumper</a> podemos obter todo o conteúdo que está no repositório git do site. Com isso conseguimos os códigos da aplicação e o binário do magick na versão 7.1.0-49, que é uma ferramenta de manipulação de imagens.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/3.png" alt=".git"  />
+</p>
+<p>Podemos ver no código-fonte do index.php que é executado o magick com o parâmetro convert e a imagem que fizemos o upload. Após a imagem ser redimensionada a URL que é gerada é salva em um banco de dados sqlite na pasta &ldquo;/var/db/pilgrimage&rdquo;.</p>
+<pre tabindex="0"><code>    if($upload) {
+      $mime = &#34;.png&#34;;
+      $imagePath = $upload-&gt;getFullPath();
+      if(mime_content_type($imagePath) === &#34;image/jpeg&#34;) {
+        $mime = &#34;.jpeg&#34;;
+      }
+      $newname = uniqid();
+      exec(&#34;/var/www/pilgrimage.htb/magick convert /var/www/pilgrimage.htb/tmp/&#34; . $upload-&gt;getName() . $mime . &#34; -resize 50% /var/www/pilgrimage.htb/shrunk/&#34; . $newname . $mime);
+      unlink($upload-&gt;getFullPath());
+      $upload_path = &#34;http://pilgrimage.htb/shrunk/&#34; . $newname . $mime;
+      if(isset($_SESSION[&#39;user&#39;])) {
+        $db = new PDO(&#39;sqlite:/var/db/pilgrimage&#39;);
+        $stmt = $db-&gt;prepare(&#34;INSERT INTO `images` (url,original,username) VALUES (?,?,?)&#34;);
+        $stmt-&gt;execute(array($upload_path,$_FILES[&#34;toConvert&#34;][&#34;name&#34;],$_SESSION[&#39;user&#39;]));
+      }
+      header(&#34;Location: /?message=&#34; . $upload_path . &#34;&amp;status=success&#34;);
+    }
+</code></pre><p>Essa versão do magick que está sendo utilizada é vulnerável ao CVE-2022-44268 e há exploits públicos. Aqui estarei utilizando a PoC do voidz0r que está disponível nesse <a href="https://github.com/voidz0r/CVE-2022-44268">link</a>.</p>
+<p>Essa PoC foi escrita em rust e ela gera uma imagem que ao ser redimensionada fará o magick ler algum outro arquivo e inserir o conteúdo na imagem resultante. Aqui eu vou ler o arquivo do banco de dados da aplicação, pois como ele também armazena os logins dos usuários pode conter alguma credencial útil.</p>
+<p>Dessa forma eu criei a imagem utilizando a PoC, depois enviei no site e fiz o download do output. Então com o identify, que também é uma ferramenta do magick, podemos obter o conteúdo do arquivo em hexadecimal (não coube no print).</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/4.png" alt="poc"  />
+</p>
+<p>Com o CyberChef eu converti de hexadecimal para texto e também removi os caracteres nulos para facilitar a visualização. Assim, podemos ver as credenciais de um usuário, emily:abigchonkyboi123.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/5.png" alt="cyberchef"  />
+</p>
+<p>Essas credenciais nos dão acesso a máquina via SSH e obtemos a primeira flag.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/6.png" alt="user"  />
+</p>
+<p>Ao fazer uma enumeração local com o pspy, encontramos que está sendo executado um script chamado &ldquo;malwarescan.sh&rdquo; pelo root.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/7.png" alt="pspy"  />
+</p>
+<p>Esse script apenas utiliza o binwalk para validar se existe alguma string no arquivo que esteja na sua blacklist. Acontece que essa versão do binwalk que está sendo executada é vulnerável ao CVE-2022-4510.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/8.png" alt="malwarescan"  />
+</p>
+<p>Utilizando a <a href="https://www.exploit-db.com/exploits/51249">PoC</a> que está no exploit-db eu criei um payload para uma reverse shell e a transferi para o diretório em que o script analisa.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/9.png" alt="download"  />
+</p>
+<p>Logo ao baixar a imagem, já recebi a reverse shell como root.</p>
+<p><img loading="lazy" src="/images/htb-pilgrimage/10.png" alt="root"  />
+</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.io/tags/write-up/">write-up</a></li>
+      <li><a href="https://tomiodarim.io/tags/hackthebox/">hackthebox</a></li>
+      <li><a href="https://tomiodarim.io/tags/machine/">machine</a></li>
+      <li><a href="https://tomiodarim.io/tags/pilgrimage/">pilgrimage</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2023</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
