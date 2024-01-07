@@ -6,7 +6,17 @@
     <description>Recent content in Posts on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 25 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Sau</title>
+      <link>https://tomiodarim.io/posts/htb-sau/</link>
+      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-sau/</guid>
+      <description>Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.
+Com um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - Pilgrimage</title>
       <link>https://tomiodarim.io/posts/htb-pilgrimage/</link>

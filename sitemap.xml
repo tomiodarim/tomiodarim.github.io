@@ -3,27 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://tomiodarim.io/tags/hackthebox/</loc>
-    <lastmod>2023-11-25T00:00:00+00:00</lastmod>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/posts/htb-sau/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/tags/machine/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/posts/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/tags/sau/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/tags/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tomiodarim.io/tags/write-up/</loc>
+    <lastmod>2024-01-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/posts/htb-pilgrimage/</loc>
     <lastmod>2023-11-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tomiodarim.io/tags/machine/</loc>
-    <lastmod>2023-11-25T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://tomiodarim.io/tags/pilgrimage/</loc>
-    <lastmod>2023-11-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tomiodarim.io/posts/</loc>
-    <lastmod>2023-11-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tomiodarim.io/tags/</loc>
-    <lastmod>2023-11-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tomiodarim.io/</loc>
-    <lastmod>2023-11-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tomiodarim.io/tags/write-up/</loc>
     <lastmod>2023-11-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tomiodarim.io/posts/htb-topology/</loc>

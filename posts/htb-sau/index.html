@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox - Sau | tomiodarim</title>
+<meta name="keywords" content="write-up, hackthebox, machine, sau">
+<meta name="description" content="Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.
+Com um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.io/posts/htb-sau/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.io/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.io/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="HackTheBox - Sau" />
+<meta property="og:description" content="Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.
+Com um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.io/posts/htb-sau/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-01-06T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - Sau"/>
+<meta name="twitter:description" content="Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.
+Com um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox - Sau",
+      "item": "https://tomiodarim.io/posts/htb-sau/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HackTheBox - Sau",
+  "name": "HackTheBox - Sau",
+  "description": "Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.\nCom um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web.",
+  "keywords": [
+    "write-up", "hackthebox", "machine", "sau"
+  ],
+  "articleBody": "Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.\nCom um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web.\nA aplicação que está sendo executada na porta 55555 é o Request Basket, um servidor que permite criar endpoint para coletar e inspecionar requisições HTTP.\nAo criar um basket e fazer uma requisição dele podemos ver informações como data e horário, headers, método do HTTP, entre outras.\nNas configurações do basket podemos configurar uma URL para Forward, assim quando fizermos uma requisição para esse basket ele vai redirecionar essa requisição para outra URL. Assim, temos uma vulnerabilidade de Server-Side Request Forgery (SSRF). Aqui eu configurei para ser redirecionado para o localhost na porta 80, dessa forma poderemos acessar essa porta que está sendo filtrada.\nTambém é necessário selecionar as opções “Proxy Response” e “Expand Forward Path”. A primeira fará com que a resposta da requisição redirecionada retorne para a gente e a outra permitirá adicionarmos um path na requisição.\nCom isso, ao acessar a URL do basket recebemos o conteúdo da aplicação que está na porta 80, sendo este o Mailtrail na versão 0.53.\nBuscando essa aplicação no google podemos encontrar uma vulnerabilidade de Remote Code Execution (RCE), o CVE-2023-27163. Há exploits públicos para essa vulnerabilidade, aqui eu utilizei o do packet storm escrito por Iyaad Luqman K.\nPara esse script é necessário passar como parâmetro o IP e porta em que retornará a reverse shell e a URL do alvo. Ao executá-lo recebemos uma shell como usuário puma. E já conseguimos a primeira flag.\nEsse usuário pode executar o comando “systemctl status” com sudo. Esse comando retorna o status do serviços informado, mas o output acontece por meio do less.\nAssim, após utilizarmos o comando é aberta uma tela do less, nesse caso não ocorreu devido a não ser uma shell totalmente interativa, e podemos invocar uma shell a partir dele com o comando “!sh”. Como o less foi executado como root então essa shell também é de root, com isso podemos obter a flag de root.\n",
+  "wordCount" : "404",
+  "inLanguage": "pt",
+  "datePublished": "2024-01-06T00:00:00Z",
+  "dateModified": "2024-01-06T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.io/posts/htb-sau/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <div class="logo">
+            <ul id="menu">
+                <li>
+                    <a href="https://tomiodarim.io/" title="home">
+                        <span>home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/whoami/" title="whoami">
+                        <span>whoami</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/tags/" title="tags">
+                        <span>tags</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      HackTheBox - Sau
+    </h1>
+    <div class="post-meta">6 de janeiro de 2024
+
+</div>
+  </header> 
+  <div class="post-content"><p>Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.</p>
+<p><img loading="lazy" src="/images/htb-sau/0.png" alt="Sau Banner"  />
+</p>
+<hr>
+<p>Com um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web.</p>
+<p><img loading="lazy" src="/images/htb-sau/1.png" alt="nmap"  />
+</p>
+<p>A aplicação que está sendo executada na porta 55555 é o Request Basket, um servidor que permite criar endpoint para coletar e inspecionar requisições HTTP.</p>
+<p><img loading="lazy" src="/images/htb-sau/2.png" alt="request basket"  />
+</p>
+<p>Ao criar um basket e fazer uma requisição dele podemos ver informações como data e horário, headers, método do HTTP, entre outras.</p>
+<p><img loading="lazy" src="/images/htb-sau/3.png" alt="basket"  />
+</p>
+<p>Nas configurações do basket podemos configurar uma URL para Forward, assim quando fizermos uma requisição para esse basket ele vai redirecionar essa requisição para outra URL. Assim, temos uma vulnerabilidade de Server-Side Request Forgery (SSRF). Aqui eu configurei para ser redirecionado para o localhost na porta 80, dessa forma poderemos acessar essa porta que está sendo filtrada.</p>
+<p>Também é necessário selecionar as opções &ldquo;Proxy Response&rdquo; e &ldquo;Expand Forward Path&rdquo;. A primeira fará com que a resposta da requisição redirecionada retorne para a gente e a outra permitirá adicionarmos um path na requisição.</p>
+<p><img loading="lazy" src="/images/htb-sau/4.png" alt="configurações"  />
+</p>
+<p>Com isso, ao acessar a URL do basket recebemos o conteúdo da aplicação que está na porta 80, sendo este o Mailtrail na versão 0.53.</p>
+<p><img loading="lazy" src="/images/htb-sau/5.png" alt="mailtrail"  />
+</p>
+<p>Buscando essa aplicação no google podemos encontrar uma vulnerabilidade de Remote Code Execution (RCE), o CVE-2023-27163. Há exploits públicos para essa vulnerabilidade, aqui eu utilizei o do <a href="https://packetstormsecurity.com/files/174129/Maltrail-0.53-Remote-Code-Execution.html">packet storm</a> escrito por Iyaad Luqman K.</p>
+<p>Para esse script é necessário passar como parâmetro o IP e porta em que retornará a reverse shell e a URL do alvo. Ao executá-lo recebemos uma shell como usuário puma. E já conseguimos a primeira flag.</p>
+<p><img loading="lazy" src="/images/htb-sau/6.png" alt="user"  />
+</p>
+<p>Esse usuário pode executar o comando &ldquo;systemctl status&rdquo; com sudo. Esse comando retorna o status do serviços informado, mas o output acontece por meio do less.</p>
+<p>Assim, após utilizarmos o comando é aberta uma tela do less, nesse caso não ocorreu devido a não ser uma shell totalmente interativa, e podemos invocar uma shell a partir dele com o comando &ldquo;!sh&rdquo;. Como o less foi executado como root então essa shell também é de root, com isso podemos obter a flag de root.</p>
+<p><img loading="lazy" src="/images/htb-sau/7.png" alt="root"  />
+</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.io/tags/write-up/">write-up</a></li>
+      <li><a href="https://tomiodarim.io/tags/hackthebox/">hackthebox</a></li>
+      <li><a href="https://tomiodarim.io/tags/machine/">machine</a></li>
+      <li><a href="https://tomiodarim.io/tags/sau/">sau</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2023</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -144,6 +144,19 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>HackTheBox - Sau
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Sau é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um SSRF na aplicação Request Basket para acessar uma segunda aplicação web que está em uma porta filtrada. Com isso é possível explorar um RCE do Mailtrail para conseguir uma shell como usuário e por fim utilizar o systemctl com sudo para obter root.
+Com um scan do nmap encontra-se três portas abertas nessa máquina, 22 do ssh, 80 está filtrada e não conseguimos acessar e a 55555 que tem uma aplicação web....</p>
+  </div>
+  <footer class="entry-footer">6 de janeiro de 2024</footer>
+  <a class="entry-link" aria-label="post link to HackTheBox - Sau" href="https://tomiodarim.io/posts/htb-sau/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>HackTheBox - Pilgrimage
     </h2>
   </header>
@@ -152,7 +165,7 @@
 Para essa máquina é necessário inserir o domínio pilgrimage.htb no arquivo de hosts local.
 Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-11-25 00:00:00 +0000 UTC'>25 de novembro de 2023</span></footer>
+  <footer class="entry-footer">25 de novembro de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - Pilgrimage" href="https://tomiodarim.io/posts/htb-pilgrimage/"></a>
 </article>
 
@@ -166,7 +179,7 @@ Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 
 Começando, como sempre, com um scan do nmap encontra-se duas portas abertas, 80 de uma aplicação web e 22 de SSH.
 Continuando o reconhecimento com um brute force de diretórios, porém não foi encontrado nada útil....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-11-04 00:00:00 +0000 UTC'>4 de novembro de 2023</span></footer>
+  <footer class="entry-footer">4 de novembro de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - Topology" href="https://tomiodarim.io/posts/htb-topology/"></a>
 </article>
 
@@ -179,7 +192,7 @@ Continuando o reconhecimento com um brute force de diretórios, porém não foi 
     <p>MonitorsTwo é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade da aplicação Cacti para obter acesso como www-data em um docker, quebrar um hash para conseguir acesso de usuário na máquina host e por fim utilizar uma vulnerabilidade do Moby para executar um binário do container no host para conseguir root.
 Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-09-02 00:00:00 +0000 UTC'>2 de setembro de 2023</span></footer>
+  <footer class="entry-footer">2 de setembro de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - MonitorsTwo" href="https://tomiodarim.io/posts/htb-monitorstwo/"></a>
 </article>
 
@@ -192,7 +205,7 @@ Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma ap
     <p>Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.
 Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-08-12 00:00:00 +0000 UTC'>12 de agosto de 2023</span></footer>
+  <footer class="entry-footer">12 de agosto de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - Busqueda" href="https://tomiodarim.io/posts/htb-busqueda/"></a>
 </article>
 
@@ -207,7 +220,7 @@ Começando escaneando as portas com o nmap para encontrar quais estão abertas. 
 Ao fazer uma requisição a aplicação web, ocorre um redirecionamento para superpass.htb. Assim, sendo necessário adicionar este endereço ao “/etc/hosts”.
 Acessando a aplicação web encontra-se um gerenciador de senhas. Quando logado, é possível adicionar novas senhas ao cofre e exportá-lo....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-08-05 00:00:00 +0000 UTC'>5 de agosto de 2023</span></footer>
+  <footer class="entry-footer">5 de agosto de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - Agile" href="https://tomiodarim.io/posts/htb-agile/"></a>
 </article>
 
@@ -221,7 +234,7 @@ Acessando a aplicação web encontra-se um gerenciador de senhas. Quando logado,
 Essa máquina possui duas portas abertas 22 e 8080, onde a primeira é o serviço de SSH e a segunda uma aplicação Web, como pode ser visto pelo scan do nmap. Diferente de outras máquinas do Hack The Box, nessa não é necessário adicionar um domínio da aplicação ao arquivo de hosts.
 Ao acessar a aplicação web encontramos uma página sobre armazenamento de arquivos na nuvem....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-07-08 00:00:00 +0000 UTC'>8 de julho de 2023</span></footer>
+  <footer class="entry-footer">8 de julho de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - Inject" href="https://tomiodarim.io/posts/htb-inject/"></a>
 </article>
     </main>

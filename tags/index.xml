@@ -6,11 +6,11 @@
     <description>Recent content in Tags on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 25 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hackthebox</title>
       <link>https://tomiodarim.io/tags/hackthebox/</link>
-      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hackthebox/</guid>
       <description></description>
@@ -19,9 +19,27 @@
     <item>
       <title>machine</title>
       <link>https://tomiodarim.io/tags/machine/</link>
-      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sau</title>
+      <link>https://tomiodarim.io/tags/sau/</link>
+      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/sau/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>write-up</title>
+      <link>https://tomiodarim.io/tags/write-up/</link>
+      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/write-up/</guid>
       <description></description>
     </item>
     
@@ -31,15 +49,6 @@
       <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/pilgrimage/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>write-up</title>
-      <link>https://tomiodarim.io/tags/write-up/</link>
-      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/write-up/</guid>
       <description></description>
     </item>
     
