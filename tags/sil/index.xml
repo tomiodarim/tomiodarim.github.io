@@ -15,7 +15,7 @@
       <guid>https://tomiodarim.io/posts/cve-2024-22632-3/</guid>
       <description>Essas vulnerabilidades foram encontradas no software Sistema Inteligente para Laboratórios (S.I.L.) desenvolvido pela Setor Informática.
 CVE-2024-22632 Ao acessar uma das páginas da aplicação é apresentado um alert para o usuário, o conteúdo desse alert pode ser alterdo pelo atacante a partir do parâmetro &amp;ldquo;hmsg&amp;rdquo;. Qualquer mensagem inserida nessa parâmetro da requisição é apresentado para o usuário.
-CVE-2024-22633 Outro parâmetro vulnerável nessa aplicação é o &amp;ldquo;hprinter&amp;rdquo;, este sendo vulneravél a execução de códigos de JavaScript (XSS).</description>
+CVE-2024-22633 Outro parâmetro vulnerável nessa aplicação é o &amp;ldquo;hprinter&amp;rdquo;, sendo este a execução de códigos de JavaScript (XSS).</description>
     </item>
     
   </channel>
