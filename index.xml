@@ -6,7 +6,29 @@
     <description>Recent content on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PoC - CVE-2024-22632 e CVE-2024-22633</title>
+      <link>https://tomiodarim.io/posts/cve-2024-22632-3/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/cve-2024-22632-3/</guid>
+      <description>Essas vulnerabilidades foram encontradas no software Sistema Inteligente para Laboratórios (S.I.L.) desenvolvido pela Setor Informática.
+CVE-2024-22632 Ao acessar uma das páginas da aplicação é apresentado um alert para o usuário, o conteúdo desse alert pode ser alterdo pelo atacante a partir do parâmetro &amp;ldquo;hmsg&amp;rdquo;. Qualquer mensagem inserida nessa parâmetro da requisição é apresentado para o usuário.
+CVE-2024-22633 Outro parâmetro vulnerável nessa aplicação é o &amp;ldquo;hprinter&amp;rdquo;, este sendo vulneravél a execução de códigos de JavaScript (XSS).</description>
+    </item>
+    
+    <item>
+      <title>HackTheBox - Keeper</title>
+      <link>https://tomiodarim.io/posts/htb-keeper/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-keeper/</guid>
+      <description>Keeper é uma máquina Linux de dificuldade fácil. Nela é preciso acessar uma aplicação web com o uso de credenciais padrão e depois recuperar a senha mestra do keepass de um dump da memória.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh.
+No site há apenas um link redirecionando para um subdomínio. Então é necessário adicionar o domínio keeper.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - Sau</title>
       <link>https://tomiodarim.io/posts/htb-sau/</link>

@@ -6,22 +6,76 @@
     <description>Recent content in Tags on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cve</title>
+      <link>https://tomiodarim.io/tags/cve/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/cve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>poc</title>
+      <link>https://tomiodarim.io/tags/poc/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/poc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sil</title>
+      <link>https://tomiodarim.io/tags/sil/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/sil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xss</title>
+      <link>https://tomiodarim.io/tags/xss/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/xss/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>hackthebox</title>
       <link>https://tomiodarim.io/tags/hackthebox/</link>
-      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/hackthebox/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>keeper</title>
+      <link>https://tomiodarim.io/tags/keeper/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/keeper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>machine</title>
       <link>https://tomiodarim.io/tags/machine/</link>
-      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>write-up</title>
+      <link>https://tomiodarim.io/tags/write-up/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/tags/write-up/</guid>
       <description></description>
     </item>
     
@@ -31,15 +85,6 @@
       <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
       
       <guid>https://tomiodarim.io/tags/sau/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>write-up</title>
-      <link>https://tomiodarim.io/tags/write-up/</link>
-      <pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://tomiodarim.io/tags/write-up/</guid>
       <description></description>
     </item>
     
