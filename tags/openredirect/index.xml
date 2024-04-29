@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Openredirect on tomiodarim</title>
+    <link>https://tomiodarim.io/tags/openredirect/</link>
+    <description>Recent content in Openredirect on tomiodarim</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt</language>
+    <lastBuildDate>Mon, 29 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/openredirect/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PoC - CVE-2024-26504</title>
+      <link>https://tomiodarim.io/posts/cve-2024-26504/</link>
+      <pubDate>Mon, 29 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/cve-2024-26504/</guid>
+      <description>O WiFire Hotspot é uma solução de Wi-Fi voltada para empresas que oferece recursos para gerenciar redes, coletar dados de clientes e implementar estratégias de marketing.
+Quando um usuário se conecta à rede Wi-Fi, é exibida uma janela pop-up que solicita o login. O login pode ser feito através de redes sociais ou por meio da criação de uma conta. Após o login, o cliente é redirecionado para a página da empresa proprietária da rede Wi-Fi.</description>
+    </item>
+    
+  </channel>
+</rss>

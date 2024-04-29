@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox - Analytics | tomiodarim</title>
+<meta name="keywords" content="write-up, hackthebox, machine, analytics">
+<meta name="description" content="Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.
+Para essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.">
+<meta name="author" content="Lucas Tomio Darim">
+<link rel="canonical" href="https://tomiodarim.io/posts/htb-analytics/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5a101feaed2bc000d60de8365173a1aa6c75665853dcc863f92f59ea5ace5d74.css" integrity="sha256-WhAf6u0rwADWDeg2UXOhqmx1ZlhT3Mhj&#43;S9Z6lrOXXQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.20cbcab8eadb4b1c256e6db331b0130fc305cd882d8b91865e9b6473e8ec5c24.js" integrity="sha256-IMvKuOrbSxwlbm2zMbATD8MFzYgti5GGXptkc&#43;jsXCQ="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://tomiodarim.io/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://tomiodarim.io/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tomiodarim.io/images/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://tomiodarim.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://tomiodarim.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="pt" href="https://tomiodarim.io/posts/htb-analytics/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="HackTheBox - Analytics" />
+<meta property="og:description" content="Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.
+Para essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tomiodarim.io/posts/htb-analytics/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-23T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - Analytics"/>
+<meta name="twitter:description" content="Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.
+Para essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://tomiodarim.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox - Analytics",
+      "item": "https://tomiodarim.io/posts/htb-analytics/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HackTheBox - Analytics",
+  "name": "HackTheBox - Analytics",
+  "description": "Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.\nPara essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.\nCom um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.",
+  "keywords": [
+    "write-up", "hackthebox", "machine", "analytics"
+  ],
+  "articleBody": "Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.\nPara essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.\nCom um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.\nAo acessar o site encontramos no canto superior direito um link para uma página de login, todos os outros são do próprio site. Ao clicar no botão de login vamos para o subdomínio data.analytical.htb, assim também precisamos adicioná-lo ao arquivo de hosts.\nApós adicionar o subdomínio e acessá-lo, encontramos uma página de login no Metabase.\nBuscando no Google é possível encontrar que o Metabase teve uma vulnerabilidade de Remote Code Execution (RCE) que não é necessário autenticação para explorá-la, o CVE-2023-38646. Também encontrei que já existe um módulo do Metasploit para essa vulnerabilidade.\nPara utilizar este módulo precisamos configurar o rhost, rport, vhost e lhost. Após isso, ao executar o módulo conseguimos uma shell como usuário metabase em um container, isso pode ser identificado pelo hostname da máquina em que estamos.\nNas variáveis de ambiente do container estão definidos um usuário e uma senha.\nCom essas credenciais podemos conectar a máquina host via SSH e conseguir a flag de usuário.\nEssa máquina é um Ubuntu na versão 22.04 e possui o kernel na versão 6.2.0. este kernel possui as vulnerabilidades CVE-2023-2640 e CVE-2023-32629, relacionadas ao overlayfs que permitem escalada de privilégios locais.\nComo o payload abaixo é possível explorar essas vulnerabilidades e conseguir root.\nunshare -rm sh -c \"mkdir l u w m \u0026\u0026 cp /u*/b*/p*3 l/;\rsetcap cap_setuid+eip l/python3;mount -t overlay overlay -o rw,lowerdir=l,upperdir=u,workdir=w m \u0026\u0026 touch m/*;\" \u0026\u0026 u/python3 -c 'import os;os.setuid(0);os.system(\"/bin/bash\")' ",
+  "wordCount" : "319",
+  "inLanguage": "pt",
+  "datePublished": "2024-03-23T00:00:00Z",
+  "dateModified": "2024-03-23T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Lucas Tomio Darim"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tomiodarim.io/posts/htb-analytics/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomiodarim",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tomiodarim.io/images/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://tomiodarim.io/" accesskey="h" title="tomiodarim (Alt + H)">tomiodarim</a>
+            
+        </div>
+        <div class="logo">
+            <ul id="menu">
+                <li>
+                    <a href="https://tomiodarim.io/" title="home">
+                        <span>home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/whoami/" title="whoami">
+                        <span>whoami</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tomiodarim.io/tags/" title="tags">
+                        <span>tags</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">
+      HackTheBox - Analytics
+    </h1>
+    <div class="post-meta">23 de março de 2024
+
+</div>
+  </header> 
+  <div class="post-content"><p>Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.</p>
+<p><img loading="lazy" src="/images/htb-analytics/0.png" alt="banner"  />
+</p>
+<hr>
+<p>Para essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.</p>
+<p>Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.</p>
+<p><img loading="lazy" src="/images/htb-analytics/1.png" alt="nmap"  />
+</p>
+<p>Ao acessar o site encontramos no canto superior direito um link para uma página de login, todos os outros são do próprio site. Ao clicar no botão de login vamos para o subdomínio  data.analytical.htb, assim também precisamos adicioná-lo ao arquivo de hosts.</p>
+<p><img loading="lazy" src="/images/htb-analytics/2.png" alt="site"  />
+</p>
+<p>Após adicionar o subdomínio e acessá-lo, encontramos uma página de login no Metabase.</p>
+<p><img loading="lazy" src="/images/htb-analytics/3.png" alt="metabase"  />
+</p>
+<p>Buscando no Google é possível encontrar que o Metabase teve uma vulnerabilidade de Remote Code Execution (RCE) que não é necessário autenticação para explorá-la, o CVE-2023-38646. Também encontrei que já existe um módulo do Metasploit para essa vulnerabilidade.</p>
+<p>Para utilizar este módulo precisamos configurar o rhost, rport, vhost e lhost. Após isso, ao executar o módulo conseguimos uma shell como usuário metabase em um container, isso pode ser identificado pelo hostname da máquina em que estamos.</p>
+<p><img loading="lazy" src="/images/htb-analytics/4.png" alt="msfconsole"  />
+</p>
+<p>Nas variáveis de ambiente do container estão definidos um usuário e uma senha.</p>
+<p><img loading="lazy" src="/images/htb-analytics/5.png" alt="env"  />
+</p>
+<p>Com essas credenciais podemos conectar a máquina host via SSH e conseguir a flag de usuário.</p>
+<p><img loading="lazy" src="/images/htb-analytics/6.png" alt="user"  />
+</p>
+<p>Essa máquina é um Ubuntu na versão 22.04 e possui o kernel na versão 6.2.0. este kernel possui as vulnerabilidades CVE-2023-2640 e CVE-2023-32629, relacionadas ao overlayfs que permitem escalada de privilégios locais.</p>
+<p><img loading="lazy" src="/images/htb-analytics/7.png" alt="kernel"  />
+</p>
+<p>Como o payload abaixo é possível explorar essas vulnerabilidades e conseguir root.</p>
+<pre tabindex="0"><code>unshare -rm sh -c &#34;mkdir l u w m &amp;&amp; cp /u*/b*/p*3 l/;
+setcap cap_setuid+eip l/python3;mount -t overlay overlay -o rw,lowerdir=l,upperdir=u,workdir=w m &amp;&amp; touch m/*;&#34; &amp;&amp; u/python3 -c &#39;import os;os.setuid(0);os.system(&#34;/bin/bash&#34;)&#39;
+</code></pre><p><img loading="lazy" src="/images/htb-analytics/8.png" alt="root"  />
+</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      tags:
+      <li><a href="https://tomiodarim.io/tags/write-up/">Write-Up</a></li>
+      <li><a href="https://tomiodarim.io/tags/hackthebox/">Hackthebox</a></li>
+      <li><a href="https://tomiodarim.io/tags/machine/">Machine</a></li>
+      <li><a href="https://tomiodarim.io/tags/analytics/">Analytics</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Lucas Tomio Darim · &copy; 2024</span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

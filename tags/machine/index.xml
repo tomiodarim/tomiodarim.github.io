@@ -6,7 +6,18 @@
     <description>Recent content in Machine on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 10 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/machine/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/machine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Analytics</title>
+      <link>https://tomiodarim.io/posts/htb-analytics/</link>
+      <pubDate>Sat, 23 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/htb-analytics/</guid>
+      <description>Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.
+Para essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web.</description>
+    </item>
+    
     <item>
       <title>HackTheBox - Keeper</title>
       <link>https://tomiodarim.io/posts/htb-keeper/</link>

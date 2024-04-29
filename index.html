@@ -154,6 +154,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>PoC - CVE-2024-26504
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>O WiFire Hotspot é uma solução de Wi-Fi voltada para empresas que oferece recursos para gerenciar redes, coletar dados de clientes e implementar estratégias de marketing.
+Quando um usuário se conecta à rede Wi-Fi, é exibida uma janela pop-up que solicita o login. O login pode ser feito através de redes sociais ou por meio da criação de uma conta. Após o login, o cliente é redirecionado para a página da empresa proprietária da rede Wi-Fi....</p>
+  </div>
+  <footer class="entry-footer">29 de abril de 2024</footer>
+  <a class="entry-link" aria-label="post link to PoC - CVE-2024-26504" href="https://tomiodarim.io/posts/cve-2024-26504/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>PoC - CVE-2024-22632 e CVE-2024-22633
     </h2>
   </header>
@@ -164,6 +177,20 @@ CVE-2024-22633 O parâmetro “hprinter” é vulnerável a execução de códig
   </div>
   <footer class="entry-footer">24 de abril de 2024</footer>
   <a class="entry-link" aria-label="post link to PoC - CVE-2024-22632 e CVE-2024-22633" href="https://tomiodarim.io/posts/cve-2024-22632-3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>HackTheBox - Analytics
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Analytics é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de um pre-auth RCE na aplicação Metabase para obter acesso a um container e nele conseguir as credenciais para acessar o host por SSH. Com isso é possível abusar de uma vulnerabilidade do kernel do Linux para obter root.
+Para essa máquina é necessário inserir o domínio analytical.htb no arquivo de hosts local.
+Com um scan do nmap encontra-se duas portas abertas nessa máquina, 22 do ssh e 80 de uma aplicação web....</p>
+  </div>
+  <footer class="entry-footer">23 de março de 2024</footer>
+  <a class="entry-link" aria-label="post link to HackTheBox - Analytics" href="https://tomiodarim.io/posts/htb-analytics/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -258,35 +285,6 @@ Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma ap
   </div>
   <footer class="entry-footer">12 de agosto de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - Busqueda" href="https://tomiodarim.io/posts/htb-busqueda/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>HackTheBox - Agile
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Agile é uma máquina Linux de dificuldade média, sendo a primeira máquina da Open Beta Season.
-Começando escaneando as portas com o nmap para encontrar quais estão abertas. Foram encontradas apenas a 22 de SSH e 80 com um servidor web.
-Ao fazer uma requisição a aplicação web, ocorre um redirecionamento para superpass.htb. Assim, sendo necessário adicionar este endereço ao “/etc/hosts”.
-Acessando a aplicação web encontra-se um gerenciador de senhas. Quando logado, é possível adicionar novas senhas ao cofre e exportá-lo....</p>
-  </div>
-  <footer class="entry-footer">5 de agosto de 2023</footer>
-  <a class="entry-link" aria-label="post link to HackTheBox - Agile" href="https://tomiodarim.io/posts/htb-agile/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>HackTheBox - Inject
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Inject é uma máquina Linux de dificuldade fácil, sendo a segunda máquina da Open Beta Season.
-Essa máquina possui duas portas abertas 22 e 8080, onde a primeira é o serviço de SSH e a segunda uma aplicação Web, como pode ser visto pelo scan do nmap. Diferente de outras máquinas do Hack The Box, nessa não é necessário adicionar um domínio da aplicação ao arquivo de hosts.
-Ao acessar a aplicação web encontramos uma página sobre armazenamento de arquivos na nuvem....</p>
-  </div>
-  <footer class="entry-footer">8 de julho de 2023</footer>
-  <a class="entry-link" aria-label="post link to HackTheBox - Inject" href="https://tomiodarim.io/posts/htb-inject/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

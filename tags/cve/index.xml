@@ -6,7 +6,17 @@
     <description>Recent content in Cve on tomiodarim</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PoC - CVE-2024-26504</title>
+      <link>https://tomiodarim.io/posts/cve-2024-26504/</link>
+      <pubDate>Mon, 29 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/cve-2024-26504/</guid>
+      <description>O WiFire Hotspot é uma solução de Wi-Fi voltada para empresas que oferece recursos para gerenciar redes, coletar dados de clientes e implementar estratégias de marketing.
+Quando um usuário se conecta à rede Wi-Fi, é exibida uma janela pop-up que solicita o login. O login pode ser feito através de redes sociais ou por meio da criação de uma conta. Após o login, o cliente é redirecionado para a página da empresa proprietária da rede Wi-Fi.</description>
+    </item>
+    
     <item>
       <title>PoC - CVE-2024-22632 e CVE-2024-22633</title>
       <link>https://tomiodarim.io/posts/cve-2024-22632-3/</link>
