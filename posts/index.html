@@ -160,6 +160,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Proving Grounds - Levram
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Levram é uma máquina Linux de dificuldade fácil do Proving Grounds Practice. Nela é preciso abusar de um RCE na aplicação Gerapy para conseguir uma shell reversa e depois escalar privilégios a partir das capabilites no python.
+Começando escaneando as portas com o nmap para encontrar quais estão abertas. Foram encontradas apenas a 22 de SSH e 8000 com uma servidor web.
+Acessando a aplicação web somos redirecionados para uma página de login do Gerapy que solicita um usuário e senha....</p>
+  </div>
+  <footer class="entry-footer">9 de junho de 2024</footer>
+  <a class="entry-link" aria-label="post link to Proving Grounds - Levram" href="https://tomiodarim.io/posts/pg-levram/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>PoC - CVE-2024-26504
     </h2>
   </header>
@@ -278,19 +292,6 @@ Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma ap
   </div>
   <footer class="entry-footer">2 de setembro de 2023</footer>
   <a class="entry-link" aria-label="post link to HackTheBox - MonitorsTwo" href="https://tomiodarim.io/posts/htb-monitorstwo/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>HackTheBox - Busqueda
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Busqueda é uma máquina Linux de dificuldade fácil. Nela é preciso abusar de uma vulnerabilidade de injeção de código na aplicação web para obter acesso como usuário svc, então por reuso de credenciais conseguir certas permissões para executar códigos como root.
-Com um scan do nmap encontra-se duas portas abertas nessa máquina, 80 de uma aplicação web e 22 de ssh. O servidor http redireciona para o domínio searcher.htb, então precisa-se adicioná-lo ao arquivo hosts local....</p>
-  </div>
-  <footer class="entry-footer">12 de agosto de 2023</footer>
-  <a class="entry-link" aria-label="post link to HackTheBox - Busqueda" href="https://tomiodarim.io/posts/htb-busqueda/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

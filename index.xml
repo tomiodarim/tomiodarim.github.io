@@ -8,6 +8,17 @@
     <language>pt</language>
     <lastBuildDate>Wed, 01 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Proving Grounds - Levram</title>
+      <link>https://tomiodarim.io/posts/pg-levram/</link>
+      <pubDate>Sun, 09 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/pg-levram/</guid>
+      <description>Levram é uma máquina Linux de dificuldade fácil do Proving Grounds Practice. Nela é preciso abusar de um RCE na aplicação Gerapy para conseguir uma shell reversa e depois escalar privilégios a partir das capabilites no python.
+Começando escaneando as portas com o nmap para encontrar quais estão abertas. Foram encontradas apenas a 22 de SSH e 8000 com uma servidor web.
+Acessando a aplicação web somos redirecionados para uma página de login do Gerapy que solicita um usuário e senha.</description>
+    </item>
+    
+    <item>
       <title>PoC - CVE-2024-26504</title>
       <link>https://tomiodarim.io/posts/cve-2024-26504/</link>
       <pubDate>Mon, 29 Apr 2024 00:00:00 +0000</pubDate>

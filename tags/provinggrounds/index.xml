@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Provinggrounds on tomiodarim</title>
+    <link>https://tomiodarim.io/tags/provinggrounds/</link>
+    <description>Recent content in Provinggrounds on tomiodarim</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt</language>
+    <lastBuildDate>Sun, 09 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://tomiodarim.io/tags/provinggrounds/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proving Grounds - Levram</title>
+      <link>https://tomiodarim.io/posts/pg-levram/</link>
+      <pubDate>Sun, 09 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://tomiodarim.io/posts/pg-levram/</guid>
+      <description>Levram é uma máquina Linux de dificuldade fácil do Proving Grounds Practice. Nela é preciso abusar de um RCE na aplicação Gerapy para conseguir uma shell reversa e depois escalar privilégios a partir das capabilites no python.
+Começando escaneando as portas com o nmap para encontrar quais estão abertas. Foram encontradas apenas a 22 de SSH e 8000 com uma servidor web.
+Acessando a aplicação web somos redirecionados para uma página de login do Gerapy que solicita um usuário e senha.</description>
+    </item>
+    
+  </channel>
+</rss>
